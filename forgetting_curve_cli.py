@@ -524,6 +524,10 @@ def main():
     """
     import time
     print("\n📖 Spaced Repetition CLI — Memorize with the Forgetting Curve!")
+    print(f"\n⚙️ Current Settings:")
+    print(f"   Forgetting Schedule (days): {FORGETTING_SCHEDULE}")
+    print(f"   Required Correct Streak: {REQUIRED_STREAK}")
+    print(f"   Daily Learning Limit: {DAILY_LEARNING_LIMIT}")
     items, daily_stats = load_data()
     
     elapsed_today = daily_stats.get(DATE_TODAY, 0)
