@@ -573,6 +573,7 @@ def main():
         print(f"\n🔮 Tomorrow's scheduled items:")
         print(f"🔁 Review items: {len(review_tomorrow)}")
         print(f"🆕 Learning items (pre-added for tomorrow): {len(learning_tomorrow)}")
+        save_data(items, daily_stats)
         sys.exit()
     filename = sys.argv[1] if len(sys.argv) > 1 else None
     add_new_items(items, daily_stats, filename)
@@ -586,6 +587,8 @@ def main():
     minutes = int(elapsed_today // 60)
     print(f"⏱️  Time spent today: {minutes} min")
     print(f"\n📅 Simulated date: {DATE_TODAY}")
+    print(f"DEBUG: Items before final save: {len(items)} items")
+    print(f"DEBUG: Daily stats before final save: {daily_stats}")
     print("🎯 Today's memorization and review are complete!")
 
 if __name__ == "__main__":
