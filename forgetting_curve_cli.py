@@ -618,8 +618,7 @@ def main():
 
     minutes = int(elapsed_today // 60)
     print(f"⏱️  Time spent today: {minutes} min")
-    print(f"
-📅 Simulated date: {DATE_TODAY}")
+    print(f"📅 Simulated date: {DATE_TODAY}")
     print("🎯 Today's memorization and review are complete!")
 
 if __name__ == "__main__":
