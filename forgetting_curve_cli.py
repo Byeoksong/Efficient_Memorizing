@@ -118,9 +118,29 @@ def load_data():
                Returns (empty dict, empty dict) if the file does not exist.
     """
     if DATA_FILE.exists():
-        with open(DATA_FILE, "r") as f:
-            full_data = json.load(f)
-            return full_data.get("items", {}), full_data.get("daily_stats", {})
+        try:
+            with open(DATA_FILE, "r") as f:
+                full_data = json.load(f)
+
+                items = {}
+                daily_stats = {}
+
+                # Check if it's the new format (contains 'items' and 'daily_stats' keys)
+                if isinstance(full_data, dict) and "items" in full_data and "daily_stats" in full_data:
+                    items = full_data.get("items", {})
+                    daily_stats = full_data.get("daily_stats", {})
+                # Check if it's the old format (items dictionary at top level)
+                elif isinstance(full_data, dict):
+                    items = full_data
+                    daily_stats = {} # Old format didn't have daily_stats at top level
+                else:
+                    return {}, {}
+
+                return items, daily_stats
+        except json.JSONDecodeError:
+            return {}, {} # Return empty if JSON is invalid
+        except Exception:
+            return {}, {}
     return {}, {}
 
 def save_data(items, daily_stats):
@@ -156,10 +176,16 @@ def add_new_items(items, daily_stats, filename=None):
             if len(lines) % 2 != 0:
                 print("❌ The input file must contain pairs of lines (question followed by answer).")
                 return
+            items_added_from_file = False
             for i in range(0, len(lines), 2):
                 q = lines[i]
                 a = lines[i+1]
-                item_id = str(len(items))
+                # Find the next available item_id
+                if items:
+                    max_id = max(int(k) for k in items.keys() if k.isdigit())
+                    item_id = str(max_id + 1)
+                else:
+                    item_id = "0"
                 items[item_id] = {
                     "question": q,
                     "answer": a,
@@ -173,11 +199,15 @@ def add_new_items(items, daily_stats, filename=None):
                     "response_times": [],
                     "error_ratios": []
                 }
-            print(f"✅ Added {len(lines)//2} Q&A pairs from {filename}")
+                items_added_from_file = True
+            if items_added_from_file:
+                print(f"✅ Added {len(lines)//2} Q&A pairs from {filename}")
+                save_data(items, daily_stats)
         except Exception as e:
             print(f"❌ Failed to load from {filename}: {e}")
     else:
         print("📚 Enter new Q&A pairs. Press Enter without typing a question to finish.")
+        items_added_interactively = False
         while True:
             q = get_input_func()("Question: ").strip()
             if q == "":
@@ -203,7 +233,9 @@ def add_new_items(items, daily_stats, filename=None):
                 "error_ratios": [],
                 "last_processed_date": DATE_TODAY
             }
-    save_data(items, daily_stats)
+            items_added_interactively = True
+        if items_added_interactively:
+            save_data(items, daily_stats)
 
 def edit_item(items, daily_stats, item_id):
     """
@@ -586,9 +618,8 @@ def main():
 
     minutes = int(elapsed_today // 60)
     print(f"⏱️  Time spent today: {minutes} min")
-    print(f"\n📅 Simulated date: {DATE_TODAY}")
-    print(f"DEBUG: Items before final save: {len(items)} items")
-    print(f"DEBUG: Daily stats before final save: {daily_stats}")
+    print(f"
+📅 Simulated date: {DATE_TODAY}")
     print("🎯 Today's memorization and review are complete!")
 
 if __name__ == "__main__":

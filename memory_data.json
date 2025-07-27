@@ -1,2605 +1,2610 @@
 {
-  "0": {
-    "question": "그 건물은 길 건너편에 있다.",
-    "answer": "The building stands across the street.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-20",
-    "response_times": [
-      30.374199151992798,
-      35.03705811500549,
-      74.45318412780762,
-      33.90643286705017,
-      28.049874782562256,
-      30.84386110305786,
-      13.609063148498535,
-      15.410387992858887,
-      29.699997186660767
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-23",
-        "scheduled_interval": 2,
-        "actual_interval": 4,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 15.410387992858887
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 29.699997186660767
-      }
-    ]
+  "items": {
+    "0": {
+      "question": "그 건물은 길 건너편에 있다.",
+      "answer": "The building stands across the street.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-20",
+      "response_times": [
+        30.374199151992798,
+        35.03705811500549,
+        74.45318412780762,
+        33.90643286705017,
+        28.049874782562256,
+        30.84386110305786,
+        13.609063148498535,
+        15.410387992858887,
+        29.699997186660767
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-23",
+          "scheduled_interval": 2,
+          "actual_interval": 4,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 15.410387992858887
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 29.699997186660767
+        }
+      ]
+    },
+    "1": {
+      "question": "네가 돈을 벌었다는 사실이 그의 관심을 산거야.",
+      "answer": "That you made a lot of money appealed to him.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-20",
+      "response_times": [
+        32.96995210647583,
+        26.94610619544983,
+        11.990361213684082,
+        18.914627075195312,
+        13.331237316131592,
+        14.083969116210938,
+        12.607139825820923,
+        26.957020044326782,
+        19.514155864715576,
+        19.440889835357666,
+        64.15626287460327,
+        11.465152740478516
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-23",
+          "scheduled_interval": 2,
+          "actual_interval": 4,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 26.957020044326782
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 19.514155864715576
+        }
+      ]
+    },
+    "2": {
+      "question": "그들은 그가 길을 따라 달리는 모습을 본다.",
+      "answer": "They see him running along the street.",
+      "correct_streak": 4,
+      "stage": 0,
+      "next_review": "2025-07-20",
+      "status": "learning",
+      "history": [
+        "X",
+        "X",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-20",
+      "response_times": [
+        24.601914167404175,
+        12.500329971313477,
+        74.377601146698,
+        48.95719504356384,
+        10.884238958358765,
+        13.831338167190552,
+        13.232869148254395,
+        19.577829122543335
+      ],
+      "error_ratios": []
+    },
+    "3": {
+      "question": "기압이 낮을 때 공기는 하늘로 상승합니다.",
+      "answer": "When air pressure is low, air is rising into the sky.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-20",
+      "response_times": [
+        31.249330759048462,
+        39.59747815132141,
+        50.85287594795227,
+        49.65410923957825,
+        29.674700021743774,
+        49.39176893234253,
+        23.29923677444458,
+        87.1855149269104,
+        16.731384992599487,
+        15.069854021072388,
+        39.45204019546509,
+        23.768325328826904,
+        10.689559698104858
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-23",
+          "scheduled_interval": 2,
+          "actual_interval": 4,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 16.731384992599487
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 15.069854021072388
+        }
+      ]
+    },
+    "4": {
+      "question": "공기 중의 수증기는 액체와 구름 형태로 바뀝니다.",
+      "answer": "Water vapor in the air turns to liquid and clouds form.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-20",
+      "response_times": [
+        87.83548712730408,
+        23.116402864456177,
+        62.296440839767456,
+        17.069765090942383,
+        152.161602973938,
+        24.60265016555786,
+        42.313279151916504,
+        24.873117208480835,
+        22.063030004501343,
+        14.03779411315918,
+        13.296376943588257
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-23",
+          "scheduled_interval": 2,
+          "actual_interval": 4,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 42.313279151916504
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 24.873117208480835
+        }
+      ]
+    },
+    "5": {
+      "question": "더 많은 공기가 상승하면서 기압은 점점 더 낮아지죠.",
+      "answer": "As more air rises, the pressure gets lower and lower.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-29",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-20",
+      "response_times": [
+        44.09201502799988,
+        29.931055068969727,
+        27.74557375907898,
+        54.330509185791016,
+        34.67335319519043,
+        18.443877696990967,
+        20.18520998954773,
+        14.48343825340271,
+        30.50241780281067,
+        29.04219388961792,
+        15.54773497581482,
+        12.403617143630981,
+        19.282851696014404,
+        15.086883068084717,
+        11.895453929901123,
+        16.965135097503662,
+        18.885961055755615
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-23",
+          "scheduled_interval": 0,
+          "actual_interval": 2,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 29.04219388961792
+        },
+        {
+          "date": "2025-07-24",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 16.965135097503662
+        },
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 18.885961055755615
+        }
+      ]
+    },
+    "6": {
+      "question": "그리고 구름은 점점 커지고 어두워집니다.",
+      "answer": "And the clouds get bigger and darker.",
+      "correct_streak": 4,
+      "stage": 0,
+      "next_review": "2025-07-20",
+      "status": "learning",
+      "history": [
+        "O",
+        "O",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-20",
+      "response_times": [
+        17.078819036483765,
+        27.660412073135376,
+        16.85774326324463,
+        18.120501041412354,
+        12.098887920379639,
+        19.35287094116211,
+        11.352611064910889,
+        13.823681831359863
+      ],
+      "error_ratios": []
+    },
+    "7": {
+      "question": "기압이 낮을 때는 많은 양의 비나 눈이 내릴 수 있습니다.",
+      "answer": "Lots of rain or snow may fall when the air pressure is low.",
+      "correct_streak": 4,
+      "stage": 0,
+      "next_review": "2025-07-20",
+      "status": "learning",
+      "history": [
+        "X",
+        "O",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-20",
+      "response_times": [
+        57.233494997024536,
+        55.212424993515015,
+        26.770967960357666,
+        23.49977707862854,
+        86.21128392219543,
+        28.550631046295166,
+        28.1202449798584,
+        24.51133704185486
+      ],
+      "error_ratios": []
+    },
+    "8": {
+      "question": "다행이도 대부분의 경우 기압은 높습니다.",
+      "answer": "Luckily, the air pressure is high most of the time.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-20",
+      "response_times": [
+        36.106805086135864,
+        19.39169192314148,
+        15.59625506401062,
+        21.92379879951477,
+        15.270159244537354,
+        14.994903802871704,
+        13.737015008926392,
+        14.365962028503418,
+        15.93668794631958,
+        25.49725580215454,
+        28.376789093017578
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-23",
+          "scheduled_interval": 2,
+          "actual_interval": 4,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 25.49725580215454
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 28.376789093017578
+        }
+      ]
+    },
+    "9": {
+      "question": "기압이 높을 때는 공기가 땅 쪽으로 가라앉죠.",
+      "answer": "When air pressure is high, air is sinking toward earth.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-20",
+      "response_times": [
+        62.25182890892029,
+        52.12310194969177,
+        17.016315937042236,
+        18.324584007263184,
+        25.1377010345459,
+        19.20049524307251,
+        14.03476095199585,
+        28.526654958724976,
+        24.553450107574463,
+        32.64555883407593,
+        19.617050886154175,
+        43.72314715385437,
+        23.24409008026123
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-23",
+          "scheduled_interval": 2,
+          "actual_interval": 4,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 43.72314715385437
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 23.24409008026123
+        }
+      ]
+    },
+    "10": {
+      "question": "바퀴는 축을 중심으로 회전한다.",
+      "answer": "The wheel turns on its axis.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-29",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-23",
+      "response_times": [
+        52.94109797477722,
+        73.04295706748962,
+        10.048272132873535,
+        8.731467008590698,
+        28.698617935180664,
+        23.82016682624817
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-24",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 28.698617935180664
+        },
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 23.82016682624817
+        }
+      ]
+    },
+    "11": {
+      "question": "그는 손잡이를 돌려 문을 열었다.",
+      "answer": "He turned the doorknob and opened the door.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-29",
+      "status": "review",
+      "history": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-23",
+      "response_times": [
+        25.617998123168945,
+        15.163899898529053,
+        12.168829917907715,
+        18.75889277458191,
+        14.496886014938354
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-24",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 18.75889277458191
+        },
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 14.496886014938354
+        }
+      ]
+    },
+    "12": {
+      "question": "식물은 태양 쪽으로 방향을 바꾼다.",
+      "answer": "Plants turn toward the sun.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-29",
+      "status": "review",
+      "history": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-23",
+      "response_times": [
+        12.863461017608643,
+        8.006780862808228,
+        14.9061861038208,
+        11.007309913635254,
+        12.026943922042847
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-24",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 11.007309913635254
+        },
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 12.026943922042847
+        }
+      ]
+    },
+    "13": {
+      "question": "경찰은 군 물대포를 겨냥했다.",
+      "answer": "The police turned the water cannon toward the crowd.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-29",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-23",
+      "response_times": [
+        31.94329595565796,
+        25.4983811378479,
+        16.255428075790405,
+        20.662819862365723,
+        18.951199054718018,
+        22.273478984832764
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-24",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 18.951199054718018
+        },
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 22.273478984832764
+        }
+      ]
+    },
+    "14": {
+      "question": "이 물병은 악기로 바뀐다.",
+      "answer": "The water bottle turns into an instrument.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-23",
+      "response_times": [
+        18.274238109588623,
+        14.785546064376831,
+        17.055788040161133,
+        13.890305042266846,
+        10.94483494758606,
+        12.897228956222534,
+        21.06754207611084
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-24",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 4,
+          "response_time": 12.897228956222534
+        },
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 21.06754207611084
+        }
+      ]
+    },
+    "15": {
+      "question": "그의 아버지는 작년에 75세가 되셨다.",
+      "answer": "His father turned 75 last years.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-23",
+      "response_times": [
+        13.414928913116455,
+        12.03371000289917,
+        15.00748324394226,
+        18.231714010238647,
+        15.165066003799438,
+        11.373938798904419,
+        12.570883750915527,
+        10.35266900062561,
+        12.156687259674072,
+        11.131247997283936,
+        8.087610244750977,
+        13.306632995605469
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-24",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 18.231714010238647
+        },
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 15.165066003799438
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 12.156687259674072
+        }
+      ]
+    },
+    "16": {
+      "question": "그 회사는 쓰레기를 자원으로 바꾼다.",
+      "answer": "The company turns waste into resource.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-29",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-23",
+      "response_times": [
+        21.284297943115234,
+        25.98121190071106,
+        11.41225790977478,
+        11.82239580154419,
+        12.033733129501343,
+        21.19078779220581
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-24",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 12.033733129501343
+        },
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 21.19078779220581
+        }
+      ]
+    },
+    "17": {
+      "question": "그녀의 거절이 날 우울하게 했다.",
+      "answer": "Her rejection turned me down.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-29",
+      "status": "review",
+      "history": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-23",
+      "response_times": [
+        10.338972091674805,
+        9.952033758163452,
+        10.583439826965332,
+        6.849284887313843,
+        13.09120798110962
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-24",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 6.849284887313843
+        },
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 13.09120798110962
+        }
+      ]
+    },
+    "18": {
+      "question": "나는 채광이 잘 되는 방이 마음에 들어요.",
+      "answer": "I like a room that gets plenty of sunshine.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        48.97927284240723,
+        13.956519842147827,
+        11.604400157928467,
+        16.030183792114258,
+        11.908003091812134,
+        10.28477692604065,
+        10.71532392501831,
+        19.86195707321167,
+        9.703506231307983,
+        13.508397102355957,
+        26.183410167694092,
+        9.60272216796875
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 11.908003091812134
+        },
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 4,
+          "response_time": 26.183410167694092
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 9.60272216796875
+        }
+      ]
+    },
+    "19": {
+      "question": "그는 곤경에 처했지만 어쩐 일인지 돈을 구해 왔다.",
+      "answer": "He was in trouble but got the money somehow.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        56.842798709869385,
+        39.170543909072876,
+        18.95294427871704,
+        19.748218774795532,
+        16.23192811012268,
+        11.529011011123657,
+        28.253102779388428,
+        18.285136699676514
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 28.253102779388428
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 18.285136699676514
+        }
+      ]
+    },
+    "20": {
+      "question": "택시타자, 안 그럼 늦을 거야.",
+      "answer": "Lets get a taxi, or we will be late.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-29",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        35.7880802154541,
+        12.864199876785278,
+        10.546579837799072,
+        9.503606081008911,
+        9.651155948638916,
+        9.72869873046875,
+        14.619281768798828,
+        10.912161588668823
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 4,
+          "response_time": 14.619281768798828
+        },
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 10.912161588668823
+        }
+      ]
+    },
+    "21": {
+      "question": "그는 심한 투통에 시달렸다.",
+      "answer": "He got terrible headaches.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        32.711129903793335,
+        16.36254119873047,
+        8.250818014144897,
+        14.660030126571655,
+        29.733542919158936,
+        16.068907976150513
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 29.733542919158936
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 16.068907976150513
+        }
+      ]
+    },
+    "22": {
+      "question": "그는 사기죄로 5년을 선고받았다.",
+      "answer": "He got five years of fraud.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        29.175400018692017,
+        10.81549596786499,
+        11.2394700050354,
+        8.964915037155151,
+        11.874528169631958,
+        11.249850034713745,
+        11.500835180282593,
+        8.938359022140503,
+        8.429100036621094
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 11.874528169631958
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 11.249850034713745
+        }
+      ]
+    },
+    "23": {
+      "question": "당신은 학교로 가서 아들을 데려오는 게 좋겠어요.",
+      "answer": "You should go and get your sun from school.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        23.70908284187317,
+        19.636959075927734,
+        11.765136003494263,
+        14.672550916671753,
+        18.961886882781982
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 14.672550916671753
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 18.961886882781982
+        }
+      ]
+    },
+    "24": {
+      "question": "그분께 음식 좀 가져다 주시겠어요?",
+      "answer": "Would you get him some food, please?",
+      "correct_streak": 0,
+      "stage": 2,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        20.46430802345276,
+        18.17368721961975,
+        29.02531409263611,
+        49.20927309989929,
+        21.232517957687378,
+        11.87110686302185,
+        14.07361388206482,
+        16.976562976837158
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 49.20927309989929
+        },
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 16.976562976837158
+        }
+      ]
+    },
+    "25": {
+      "question": "이 멋진 셔츠는 어디서 샀어?",
+      "answer": "Where did you get this great shirt?",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        57.78550696372986,
+        12.43876600265503,
+        10.576203107833862,
+        10.055960893630981,
+        16.09959888458252,
+        16.65708589553833,
+        13.85612177848816,
+        7.288381099700928,
+        11.620948076248169
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 16.09959888458252
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 16.65708589553833
+        }
+      ]
+    },
+    "26": {
+      "question": "아버지께 선물 사드린 거 아니였어요?",
+      "answer": "Didn't you get your dad a present?",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        14.914171934127808,
+        13.449289083480835,
+        13.420070171356201,
+        8.619668960571289,
+        11.847494840621948
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 8.619668960571289
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 11.847494840621948
+        }
+      ]
+    },
+    "27": {
+      "question": "우리는 10시에 로스 엔젤레스에 겨우 도착했다.",
+      "answer": "We managed to get Los Angeles at 10 o'clock.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        29.901283979415894,
+        21.178194999694824,
+        35.851332902908325,
+        12.483719825744629,
+        24.80894684791565,
+        20.746025800704956
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 24.80894684791565
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 20.746025800704956
+        }
+      ]
+    },
+    "28": {
+      "question": "그는 반려견이 죽고 나서 앓았다.",
+      "answer": "He got sick after his dog died.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        19.97670602798462,
+        15.378997325897217,
+        12.200328350067139,
+        11.395392179489136,
+        17.92590093612671,
+        15.949530124664307
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 17.92590093612671
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 15.949530124664307
+        }
+      ]
+    },
+    "29": {
+      "question": "그와 알고 지내다 보면 실망하게 될 거야.",
+      "answer": "You will be disappointed once you get to know him.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        35.99139094352722,
+        16.12989592552185,
+        13.77053189277649,
+        12.318809032440186,
+        13.370457887649536,
+        11.87744688987732,
+        16.19566512107849,
+        32.689682960510254
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 16.19566512107849
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 32.689682960510254
+        }
+      ]
+    },
+    "30": {
+      "question": "그 사람이 무슨 말을 하는 건지 못 알아들었어요.",
+      "answer": "I could not get what he was saying.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        42.65924906730652,
+        13.913358926773071,
+        13.104036808013916,
+        14.0588219165802,
+        23.126128911972046,
+        13.554072141647339
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 23.126128911972046
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 13.554072141647339
+        }
+      ]
+    },
+    "31": {
+      "question": "언제쯤 작업을 다 끝낼 것 같나요?",
+      "answer": "When do you think you will get the work finished?",
+      "correct_streak": 0,
+      "stage": 2,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        25.134249210357666,
+        29.72266387939453,
+        17.94688105583191,
+        16.69473695755005,
+        28.237298011779785,
+        14.320075988769531,
+        33.409767150878906,
+        18.62880277633667,
+        12.160474061965942,
+        14.908749103546143,
+        10.939782857894897,
+        17.721358060836792
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 33.409767150878906
+        },
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 17.721358060836792
+        }
+      ]
+    },
+    "32": {
+      "question": "선생님은 Jim한테 내 숙제를 도와주라고 하셨다.",
+      "answer": "My teacher got Jim to help me with my homework.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "O",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-24",
+      "response_times": [
+        30.658605098724365,
+        14.495864868164062,
+        16.76667094230652,
+        15.167023181915283,
+        13.591418981552124
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-25",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 15.167023181915283
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 13.591418981552124
+        }
+      ]
+    },
+    "33": {
+      "question": "하루 종일 비가 내린다.",
+      "answer": "The rain has been falling all day.",
+      "correct_streak": 0,
+      "stage": 2,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-25",
+      "response_times": [
+        33.866764068603516,
+        29.29356813430786,
+        44.50519776344299,
+        10.286770820617676,
+        9.615081071853638
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 9.615081071853638
+        }
+      ]
+    },
+    "34": {
+      "question": "엄마는 물잔에 손을 뻗다가 넘어지셨다.",
+      "answer": "My mom fell as she reached for the glass.",
+      "correct_streak": 0,
+      "stage": 2,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-25",
+      "response_times": [
+        35.943511962890625,
+        73.2090470790863,
+        14.424638986587524,
+        13.55925703048706,
+        15.14908480644226
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 15.14908480644226
+        }
+      ]
+    },
+    "35": {
+      "question": "그녀는 항상 자정이 되지 전에 잠이 든다.",
+      "answer": "She always falls asleep before midnight.",
+      "correct_streak": 0,
+      "stage": 2,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-25",
+      "response_times": [
+        66.5545699596405,
+        15.767065286636353,
+        26.098335027694702,
+        14.900466918945312,
+        19.52710795402527
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 19.52710795402527
+        }
+      ]
+    },
+    "36": {
+      "question": "올해는 자동차 업계 매출이 떨어질 것으로 전망된다.",
+      "answer": "The sales in the automotive industry are expected to fall this year.",
+      "correct_streak": 0,
+      "stage": 3,
+      "next_review": "2025-07-30",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-25",
+      "response_times": [
+        52.40548586845398,
+        29.771010160446167,
+        19.216503143310547,
+        50.74989604949951,
+        36.61197590827942,
+        27.649780988693237,
+        18.619369983673096,
+        34.97647190093994,
+        19.01493501663208
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 4,
+          "response_time": 34.97647190093994
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 3,
+          "actual_interval": 3,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 19.01493501663208
+        }
+      ]
+    },
+    "37": {
+      "question": "최근 내린 비로 기온이 떨어질 것이다.",
+      "answer": "The temperatures are going to fall due to the resent rainfall.",
+      "correct_streak": 0,
+      "stage": 2,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "X",
+        "O",
+        "X",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-25",
+      "response_times": [
+        50.89240503311157,
+        20.019174098968506,
+        22.374487161636353,
+        40.01629996299744,
+        73.90943002700806,
+        62.26550507545471,
+        15.521575212478638,
+        24.852108001708984,
+        46.887645959854126,
+        19.97921109199524,
+        22.66581916809082
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 22.66581916809082
+        }
+      ]
+    },
+    "38": {
+      "question": "내린 눈이 가파른 산의 측면에 쌓이게 되면 경사면 전체가 갑자기 허물어져 산 아래로 미끄러져 내려갈 수 있는데 시간당 최고 200 마일의 속도로 내려갑니다.",
+      "answer": "When snowfall builds up on a steep mountainside, a whole section of a slope may break loose suddenly and slide down the mountain, moving at speeds of up to 200 miles per hour.",
+      "correct_streak": 0,
+      "stage": 2,
+      "next_review": "2025-07-29",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-25",
+      "response_times": [
+        123.49595808982849,
+        160.602126121521,
+        62.55616784095764,
+        61.36484718322754,
+        176.3812379837036,
+        52.63293266296387,
+        55.2453031539917,
+        60.2769980430603,
+        46.25520205497742,
+        70.41176009178162,
+        66.90715479850769,
+        52.62104916572571,
+        46.9794499874115,
+        86.15830087661743
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 70.41176009178162
+        },
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 86.15830087661743
+        }
+      ]
+    },
+    "39": {
+      "question": "눈 사태로 인해 사망하는 에베레스트산 등반객이 가장 많죠.",
+      "answer": "More climbers on Mount Everest are killed by avalanches than by anything else.",
+      "correct_streak": 0,
+      "stage": 2,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-25",
+      "response_times": [
+        82.68231511116028,
+        51.36591196060181,
+        34.745014905929565,
+        30.202253103256226,
+        53.38248014450073,
+        25.843385934829712,
+        74.79161977767944,
+        33.004514932632446
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 33.004514932632446
+        }
+      ]
+    },
+    "40": {
+      "question": "에베레스트산은 너무 높아서 제트 기류에 영향을 받습니다. 이것은 폭이 좁고 빠르게 움직이는 기류로 해수면으로부터 6~10마일 위에서 지구를 돌고 있어요.",
+      "answer": "Mount Everest is so tall that it is affected by jet stream, a narrow, fast-moving air current that circles the world six to ten miles above sea level.",
+      "correct_streak": 0,
+      "stage": 2,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-25",
+      "response_times": [
+        131.25067710876465,
+        77.51112079620361,
+        79.50174379348755,
+        92.12769913673401,
+        51.14069604873657,
+        62.27053427696228,
+        69.37318706512451,
+        61.419418811798096,
+        48.31788897514343,
+        41.73214101791382,
+        51.72949719429016,
+        39.918984174728394,
+        44.22305488586426
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-26",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 44.22305488586426
+        }
+      ]
+    },
+    "41": {
+      "question": "내 핸드폰이 바닥에 떨어져서 부서졌다.",
+      "answer": "My mobile phone fell to the floor and broke.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-26",
+      "response_times": [
+        60.469484090805054,
+        17.947930097579956,
+        28.69590997695923,
+        20.23388123512268,
+        22.757142782211304,
+        15.948975086212158,
+        14.9145028591156,
+        16.50878596305847
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 22.757142782211304
+        }
+      ]
+    },
+    "42": {
+      "question": "잭은 넘어져 다리가 부서졌다.",
+      "answer": "Jack fell and broke his leg.",
+      "correct_streak": 0,
+      "stage": 2,
+      "next_review": "2025-07-29",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-26",
+      "response_times": [
+        34.89203500747681,
+        17.61886501312256,
+        8.645259857177734,
+        14.770092964172363,
+        32.62064290046692
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 32.62064290046692
+        }
+      ]
+    },
+    "43": {
+      "question": "폭풍이 몰아칠 때 배에 묶어 둔 줄이 느슨해졌다.",
+      "answer": "The boat broke loose during the storm.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-26",
+      "response_times": [
+        35.97138690948486,
+        67.96681499481201,
+        29.805135011672974,
+        12.05867600440979,
+        14.82904601097107,
+        10.63302493095398,
+        19.52051091194153,
+        23.19422221183777,
+        12.932543992996216,
+        10.438809156417847,
+        15.114562034606934
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 19.52051091194153
+        }
+      ]
+    },
+    "44": {
+      "question": "그들은 금고를 부숴 열었다.",
+      "answer": "They broke the safe open.",
+      "correct_streak": 0,
+      "stage": 2,
+      "next_review": "2025-07-29",
+      "status": "review",
+      "history": [
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-26",
+      "response_times": [
+        26.292459964752197,
+        44.26270079612732,
+        12.611711025238037,
+        13.47216010093689
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 13.47216010093689
+        }
+      ]
+    },
+    "45": {
+      "question": "이 정적을 깨뜨려 줄 사람이 필요하군요.",
+      "answer": "We need someone to break the silence.",
+      "correct_streak": 0,
+      "stage": 2,
+      "next_review": "2025-07-29",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-26",
+      "response_times": [
+        30.209223747253418,
+        19.423969984054565,
+        12.84834909439087,
+        10.432546138763428,
+        30.47894811630249
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 2,
+          "actual_interval": 2,
+          "is_correct": true,
+          "r": 5,
+          "response_time": 30.47894811630249
+        }
+      ]
+    },
+    "46": {
+      "question": "그는 결국 나와 한 약속을 깨뜨렸다.",
+      "answer": "He has finally broken his promise to me.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-26",
+      "response_times": [
+        23.3958420753479,
+        14.57054328918457,
+        22.57129192352295,
+        12.411696672439575,
+        13.747311115264893,
+        28.475372076034546,
+        26.724670886993408,
+        15.605876207351685,
+        36.14301609992981,
+        14.169628143310547,
+        10.816162109375
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 28.475372076034546
+        }
+      ]
+    },
+    "47": {
+      "question": "법을 어긴 사람은 누구든 처벌을 받게 된다.",
+      "answer": "Anyone who break the law will be subject to punishment.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-26",
+      "response_times": [
+        28.734031200408936,
+        45.73294401168823,
+        70.03209280967712,
+        27.84554696083069,
+        16.600036144256592,
+        15.202073097229004,
+        14.68680715560913,
+        35.72571277618408,
+        18.515284061431885,
+        15.937798738479614,
+        15.723373174667358
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 35.72571277618408
+        }
+      ]
+    },
+    "48": {
+      "question": "비용을 교통비, 식대, 숙박비로 나눠 보죠.",
+      "answer": "Let me break the cost down into transportation, food, and hotel.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-26",
+      "response_times": [
+        36.73638296127319,
+        50.525386810302734,
+        16.744303226470947,
+        22.3348548412323,
+        14.902676820755005,
+        19.947155952453613,
+        14.286902904510498,
+        21.81825876235962,
+        23.402096033096313,
+        19.663960933685303,
+        12.126928091049194,
+        11.802669048309326
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 21.81825876235962
+        }
+      ]
+    },
+    "49": {
+      "question": "추문이 돌자 그의 행복한 결혼생활도 끝났다.",
+      "answer": "His happy marriage came to an end when the scandal broke.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-26",
+      "response_times": [
+        86.63551211357117,
+        38.28071999549866,
+        33.618720054626465,
+        28.628674030303955,
+        22.757951974868774,
+        15.798903942108154,
+        44.68110513687134,
+        36.33191394805908,
+        22.274433135986328,
+        18.60539412498474
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 44.68110513687134
+        }
+      ]
+    },
+    "50": {
+      "question": "어느 신문사에서 이 기사를 터뜨렸는지 알아요?",
+      "answer": "Do you know which newspapers broke the story?",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "O",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-26",
+      "response_times": [
+        33.002108097076416,
+        23.664119005203247,
+        26.425221920013428,
+        14.864901304244995,
+        13.932360887527466,
+        26.39740490913391,
+        19.66828489303589,
+        15.542864322662354,
+        16.051483154296875
+      ],
+      "error_ratios": [],
+      "review_log": [
+        {
+          "date": "2025-07-27",
+          "scheduled_interval": 0,
+          "actual_interval": 0,
+          "is_correct": false,
+          "r": 0,
+          "response_time": 26.39740490913391
+        }
+      ]
+    },
+    "51": {
+      "question": "차가 도로에서 미끄러져 나가 바리케이드를 부딪쳤다.",
+      "answer": "A car slide off the road and hit a barricade.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-27",
+      "response_times": [
+        25.20917820930481,
+        17.90665316581726,
+        21.07225775718689,
+        22.26386284828186,
+        12.439046144485474,
+        11.231130838394165
+      ],
+      "error_ratios": []
+    },
+    "52": {
+      "question": "문이 미끄러져 저절로 열였다.",
+      "answer": "The door was sliding open of itself.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-27",
+      "response_times": [
+        11.787944793701172,
+        11.578654050827026,
+        18.432121992111206,
+        13.60018801689148
+      ],
+      "error_ratios": []
+    },
+    "53": {
+      "question": "난간을 손으로 훑지 마세요. 다칠 수도 있습니다.",
+      "answer": "Don't slide your hand along the rail-It may hurt you.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "O",
+        "O",
+        "X",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-27",
+      "response_times": [
+        89.93091607093811,
+        19.261062145233154,
+        14.846015930175781,
+        11.486775159835815,
+        13.810664892196655,
+        23.97784399986267
+      ],
+      "error_ratios": []
+    },
+    "54": {
+      "question": "그는 보스가 다가오는 것을 봤고 서랍을 조용히 닫았다.",
+      "answer": "He noticed his boss coming and quietly slid the drawer shut.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "X",
+        "O",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-27",
+      "response_times": [
+        25.806218147277832,
+        21.988293170928955,
+        22.292865991592407,
+        22.264243125915527,
+        23.45041275024414,
+        23.07740068435669,
+        17.02838683128357,
+        14.857280731201172
+      ],
+      "error_ratios": []
+    },
+    "55": {
+      "question": "그들은 잠자리에 들었고 바로 잠이 들었다.",
+      "answer": "They slid into bed and fell asleep at once.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "O",
+        "O",
+        "X",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-27",
+      "response_times": [
+        27.78983998298645,
+        35.594220876693726,
+        19.15456795692444,
+        17.237722158432007,
+        30.460150003433228,
+        26.67120385169983,
+        41.765275955200195,
+        15.9621102809906,
+        10.330074787139893
+      ],
+      "error_ratios": []
+    },
+    "56": {
+      "question": "그는 편지봉투를 주머니에서 재빨리 집어 넣었다.",
+      "answer": "He was sliding the envelop into his pocket.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-27",
+      "response_times": [
+        24.76974320411682,
+        28.354680061340332,
+        24.561380863189697,
+        16.73948907852173,
+        14.594238042831421
+      ],
+      "error_ratios": []
+    },
+    "57": {
+      "question": "출산율이 최저치로 내려갔다.",
+      "answer": "The birth rate has slid to the lowest level.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-27",
+      "response_times": [
+        25.642663717269897,
+        22.384593963623047,
+        15.918360233306885,
+        14.458355903625488,
+        14.953648805618286
+      ],
+      "error_ratios": []
+    },
+    "58": {
+      "question": "세계 경제가 불황에 빠져들고 있다.",
+      "answer": "The world economy is sliding into recession.",
+      "correct_streak": 0,
+      "stage": 1,
+      "next_review": "2025-07-28",
+      "status": "review",
+      "history": [
+        "X",
+        "X",
+        "O",
+        "O",
+        "O"
+      ],
+      "postponed": false,
+      "created_at": "2025-07-27",
+      "response_times": [
+        35.496142625808716,
+        22.51001000404358,
+        12.291152954101562,
+        16.496820211410522,
+        21.410128831863403
+      ],
+      "error_ratios": []
+    }
   },
-  "1": {
-    "question": "네가 돈을 벌었다는 사실이 그의 관심을 산거야.",
-    "answer": "That you made a lot of money appealed to him.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-20",
-    "response_times": [
-      32.96995210647583,
-      26.94610619544983,
-      11.990361213684082,
-      18.914627075195312,
-      13.331237316131592,
-      14.083969116210938,
-      12.607139825820923,
-      26.957020044326782,
-      19.514155864715576,
-      19.440889835357666,
-      64.15626287460327,
-      11.465152740478516
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-23",
-        "scheduled_interval": 2,
-        "actual_interval": 4,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 26.957020044326782
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 19.514155864715576
-      }
-    ]
-  },
-  "2": {
-    "question": "그들은 그가 길을 따라 달리는 모습을 본다.",
-    "answer": "They see him running along the street.",
-    "correct_streak": 4,
-    "stage": 0,
-    "next_review": "2025-07-20",
-    "status": "learning",
-    "history": [
-      "X",
-      "X",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-20",
-    "response_times": [
-      24.601914167404175,
-      12.500329971313477,
-      74.377601146698,
-      48.95719504356384,
-      10.884238958358765,
-      13.831338167190552,
-      13.232869148254395,
-      19.577829122543335
-    ],
-    "error_ratios": []
-  },
-  "3": {
-    "question": "기압이 낮을 때 공기는 하늘로 상승합니다.",
-    "answer": "When air pressure is low, air is rising into the sky.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-20",
-    "response_times": [
-      31.249330759048462,
-      39.59747815132141,
-      50.85287594795227,
-      49.65410923957825,
-      29.674700021743774,
-      49.39176893234253,
-      23.29923677444458,
-      87.1855149269104,
-      16.731384992599487,
-      15.069854021072388,
-      39.45204019546509,
-      23.768325328826904,
-      10.689559698104858
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-23",
-        "scheduled_interval": 2,
-        "actual_interval": 4,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 16.731384992599487
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 15.069854021072388
-      }
-    ]
-  },
-  "4": {
-    "question": "공기 중의 수증기는 액체와 구름 형태로 바뀝니다.",
-    "answer": "Water vapor in the air turns to liquid and clouds form.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-20",
-    "response_times": [
-      87.83548712730408,
-      23.116402864456177,
-      62.296440839767456,
-      17.069765090942383,
-      152.161602973938,
-      24.60265016555786,
-      42.313279151916504,
-      24.873117208480835,
-      22.063030004501343,
-      14.03779411315918,
-      13.296376943588257
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-23",
-        "scheduled_interval": 2,
-        "actual_interval": 4,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 42.313279151916504
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 24.873117208480835
-      }
-    ]
-  },
-  "5": {
-    "question": "더 많은 공기가 상승하면서 기압은 점점 더 낮아지죠.",
-    "answer": "As more air rises, the pressure gets lower and lower.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-29",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "X",
-      "X",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-20",
-    "response_times": [
-      44.09201502799988,
-      29.931055068969727,
-      27.74557375907898,
-      54.330509185791016,
-      34.67335319519043,
-      18.443877696990967,
-      20.18520998954773,
-      14.48343825340271,
-      30.50241780281067,
-      29.04219388961792,
-      15.54773497581482,
-      12.403617143630981,
-      19.282851696014404,
-      15.086883068084717,
-      11.895453929901123,
-      16.965135097503662,
-      18.885961055755615
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-23",
-        "scheduled_interval": 0,
-        "actual_interval": 2,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 29.04219388961792
-      },
-      {
-        "date": "2025-07-24",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 16.965135097503662
-      },
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 18.885961055755615
-      }
-    ]
-  },
-  "6": {
-    "question": "그리고 구름은 점점 커지고 어두워집니다.",
-    "answer": "And the clouds get bigger and darker.",
-    "correct_streak": 4,
-    "stage": 0,
-    "next_review": "2025-07-20",
-    "status": "learning",
-    "history": [
-      "O",
-      "O",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-20",
-    "response_times": [
-      17.078819036483765,
-      27.660412073135376,
-      16.85774326324463,
-      18.120501041412354,
-      12.098887920379639,
-      19.35287094116211,
-      11.352611064910889,
-      13.823681831359863
-    ],
-    "error_ratios": []
-  },
-  "7": {
-    "question": "기압이 낮을 때는 많은 양의 비나 눈이 내릴 수 있습니다.",
-    "answer": "Lots of rain or snow may fall when the air pressure is low.",
-    "correct_streak": 4,
-    "stage": 0,
-    "next_review": "2025-07-20",
-    "status": "learning",
-    "history": [
-      "X",
-      "O",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-20",
-    "response_times": [
-      57.233494997024536,
-      55.212424993515015,
-      26.770967960357666,
-      23.49977707862854,
-      86.21128392219543,
-      28.550631046295166,
-      28.1202449798584,
-      24.51133704185486
-    ],
-    "error_ratios": []
-  },
-  "8": {
-    "question": "다행이도 대부분의 경우 기압은 높습니다.",
-    "answer": "Luckily, the air pressure is high most of the time.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-20",
-    "response_times": [
-      36.106805086135864,
-      19.39169192314148,
-      15.59625506401062,
-      21.92379879951477,
-      15.270159244537354,
-      14.994903802871704,
-      13.737015008926392,
-      14.365962028503418,
-      15.93668794631958,
-      25.49725580215454,
-      28.376789093017578
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-23",
-        "scheduled_interval": 2,
-        "actual_interval": 4,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 25.49725580215454
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 28.376789093017578
-      }
-    ]
-  },
-  "9": {
-    "question": "기압이 높을 때는 공기가 땅 쪽으로 가라앉죠.",
-    "answer": "When air pressure is high, air is sinking toward earth.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-20",
-    "response_times": [
-      62.25182890892029,
-      52.12310194969177,
-      17.016315937042236,
-      18.324584007263184,
-      25.1377010345459,
-      19.20049524307251,
-      14.03476095199585,
-      28.526654958724976,
-      24.553450107574463,
-      32.64555883407593,
-      19.617050886154175,
-      43.72314715385437,
-      23.24409008026123
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-23",
-        "scheduled_interval": 2,
-        "actual_interval": 4,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 43.72314715385437
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 23.24409008026123
-      }
-    ]
-  },
-  "10": {
-    "question": "바퀴는 축을 중심으로 회전한다.",
-    "answer": "The wheel turns on its axis.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-29",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-23",
-    "response_times": [
-      52.94109797477722,
-      73.04295706748962,
-      10.048272132873535,
-      8.731467008590698,
-      28.698617935180664,
-      23.82016682624817
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-24",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 28.698617935180664
-      },
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 23.82016682624817
-      }
-    ]
-  },
-  "11": {
-    "question": "그는 손잡이를 돌려 문을 열었다.",
-    "answer": "He turned the doorknob and opened the door.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-29",
-    "status": "review",
-    "history": [
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-23",
-    "response_times": [
-      25.617998123168945,
-      15.163899898529053,
-      12.168829917907715,
-      18.75889277458191,
-      14.496886014938354
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-24",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 18.75889277458191
-      },
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 14.496886014938354
-      }
-    ]
-  },
-  "12": {
-    "question": "식물은 태양 쪽으로 방향을 바꾼다.",
-    "answer": "Plants turn toward the sun.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-29",
-    "status": "review",
-    "history": [
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-23",
-    "response_times": [
-      12.863461017608643,
-      8.006780862808228,
-      14.9061861038208,
-      11.007309913635254,
-      12.026943922042847
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-24",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 11.007309913635254
-      },
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 12.026943922042847
-      }
-    ]
-  },
-  "13": {
-    "question": "경찰은 군 물대포를 겨냥했다.",
-    "answer": "The police turned the water cannon toward the crowd.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-29",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-23",
-    "response_times": [
-      31.94329595565796,
-      25.4983811378479,
-      16.255428075790405,
-      20.662819862365723,
-      18.951199054718018,
-      22.273478984832764
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-24",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 18.951199054718018
-      },
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 22.273478984832764
-      }
-    ]
-  },
-  "14": {
-    "question": "이 물병은 악기로 바뀐다.",
-    "answer": "The water bottle turns into an instrument.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-23",
-    "response_times": [
-      18.274238109588623,
-      14.785546064376831,
-      17.055788040161133,
-      13.890305042266846,
-      10.94483494758606,
-      12.897228956222534,
-      21.06754207611084
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-24",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 4,
-        "response_time": 12.897228956222534
-      },
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 21.06754207611084
-      }
-    ]
-  },
-  "15": {
-    "question": "그의 아버지는 작년에 75세가 되셨다.",
-    "answer": "His father turned 75 last years.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "O",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-23",
-    "response_times": [
-      13.414928913116455,
-      12.03371000289917,
-      15.00748324394226,
-      18.231714010238647,
-      15.165066003799438,
-      11.373938798904419,
-      12.570883750915527,
-      10.35266900062561,
-      12.156687259674072,
-      11.131247997283936,
-      8.087610244750977,
-      13.306632995605469
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-24",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 18.231714010238647
-      },
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 15.165066003799438
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 12.156687259674072
-      }
-    ]
-  },
-  "16": {
-    "question": "그 회사는 쓰레기를 자원으로 바꾼다.",
-    "answer": "The company turns waste into resource.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-29",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-23",
-    "response_times": [
-      21.284297943115234,
-      25.98121190071106,
-      11.41225790977478,
-      11.82239580154419,
-      12.033733129501343,
-      21.19078779220581
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-24",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 12.033733129501343
-      },
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 21.19078779220581
-      }
-    ]
-  },
-  "17": {
-    "question": "그녀의 거절이 날 우울하게 했다.",
-    "answer": "Her rejection turned me down.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-29",
-    "status": "review",
-    "history": [
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-23",
-    "response_times": [
-      10.338972091674805,
-      9.952033758163452,
-      10.583439826965332,
-      6.849284887313843,
-      13.09120798110962
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-24",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 6.849284887313843
-      },
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 13.09120798110962
-      }
-    ]
-  },
-  "18": {
-    "question": "나는 채광이 잘 되는 방이 마음에 들어요.",
-    "answer": "I like a room that gets plenty of sunshine.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      48.97927284240723,
-      13.956519842147827,
-      11.604400157928467,
-      16.030183792114258,
-      11.908003091812134,
-      10.28477692604065,
-      10.71532392501831,
-      19.86195707321167,
-      9.703506231307983,
-      13.508397102355957,
-      26.183410167694092,
-      9.60272216796875
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 11.908003091812134
-      },
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 4,
-        "response_time": 26.183410167694092
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 9.60272216796875
-      }
-    ]
-  },
-  "19": {
-    "question": "그는 곤경에 처했지만 어쩐 일인지 돈을 구해 왔다.",
-    "answer": "He was in trouble but got the money somehow.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      56.842798709869385,
-      39.170543909072876,
-      18.95294427871704,
-      19.748218774795532,
-      16.23192811012268,
-      11.529011011123657,
-      28.253102779388428,
-      18.285136699676514
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 28.253102779388428
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 18.285136699676514
-      }
-    ]
-  },
-  "20": {
-    "question": "택시타자, 안 그럼 늦을 거야.",
-    "answer": "Lets get a taxi, or we will be late.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-29",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      35.7880802154541,
-      12.864199876785278,
-      10.546579837799072,
-      9.503606081008911,
-      9.651155948638916,
-      9.72869873046875,
-      14.619281768798828,
-      10.912161588668823
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 4,
-        "response_time": 14.619281768798828
-      },
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 10.912161588668823
-      }
-    ]
-  },
-  "21": {
-    "question": "그는 심한 투통에 시달렸다.",
-    "answer": "He got terrible headaches.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      32.711129903793335,
-      16.36254119873047,
-      8.250818014144897,
-      14.660030126571655,
-      29.733542919158936,
-      16.068907976150513
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 29.733542919158936
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 16.068907976150513
-      }
-    ]
-  },
-  "22": {
-    "question": "그는 사기죄로 5년을 선고받았다.",
-    "answer": "He got five years of fraud.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      29.175400018692017,
-      10.81549596786499,
-      11.2394700050354,
-      8.964915037155151,
-      11.874528169631958,
-      11.249850034713745,
-      11.500835180282593,
-      8.938359022140503,
-      8.429100036621094
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 11.874528169631958
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 11.249850034713745
-      }
-    ]
-  },
-  "23": {
-    "question": "당신은 학교로 가서 아들을 데려오는 게 좋겠어요.",
-    "answer": "You should go and get your sun from school.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      23.70908284187317,
-      19.636959075927734,
-      11.765136003494263,
-      14.672550916671753,
-      18.961886882781982
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 14.672550916671753
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 18.961886882781982
-      }
-    ]
-  },
-  "24": {
-    "question": "그분께 음식 좀 가져다 주시겠어요?",
-    "answer": "Would you get him some food, please?",
-    "correct_streak": 0,
-    "stage": 2,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      20.46430802345276,
-      18.17368721961975,
-      29.02531409263611,
-      49.20927309989929,
-      21.232517957687378,
-      11.87110686302185,
-      14.07361388206482,
-      16.976562976837158
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 49.20927309989929
-      },
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 16.976562976837158
-      }
-    ]
-  },
-  "25": {
-    "question": "이 멋진 셔츠는 어디서 샀어?",
-    "answer": "Where did you get this great shirt?",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      57.78550696372986,
-      12.43876600265503,
-      10.576203107833862,
-      10.055960893630981,
-      16.09959888458252,
-      16.65708589553833,
-      13.85612177848816,
-      7.288381099700928,
-      11.620948076248169
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 16.09959888458252
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 16.65708589553833
-      }
-    ]
-  },
-  "26": {
-    "question": "아버지께 선물 사드린 거 아니였어요?",
-    "answer": "Didn't you get your dad a present?",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      14.914171934127808,
-      13.449289083480835,
-      13.420070171356201,
-      8.619668960571289,
-      11.847494840621948
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 8.619668960571289
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 11.847494840621948
-      }
-    ]
-  },
-  "27": {
-    "question": "우리는 10시에 로스 엔젤레스에 겨우 도착했다.",
-    "answer": "We managed to get Los Angeles at 10 o'clock.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      29.901283979415894,
-      21.178194999694824,
-      35.851332902908325,
-      12.483719825744629,
-      24.80894684791565,
-      20.746025800704956
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 24.80894684791565
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 20.746025800704956
-      }
-    ]
-  },
-  "28": {
-    "question": "그는 반려견이 죽고 나서 앓았다.",
-    "answer": "He got sick after his dog died.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      19.97670602798462,
-      15.378997325897217,
-      12.200328350067139,
-      11.395392179489136,
-      17.92590093612671,
-      15.949530124664307
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 17.92590093612671
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 15.949530124664307
-      }
-    ]
-  },
-  "29": {
-    "question": "그와 알고 지내다 보면 실망하게 될 거야.",
-    "answer": "You will be disappointed once you get to know him.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      35.99139094352722,
-      16.12989592552185,
-      13.77053189277649,
-      12.318809032440186,
-      13.370457887649536,
-      11.87744688987732,
-      16.19566512107849,
-      32.689682960510254
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 16.19566512107849
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 32.689682960510254
-      }
-    ]
-  },
-  "30": {
-    "question": "그 사람이 무슨 말을 하는 건지 못 알아들었어요.",
-    "answer": "I could not get what he was saying.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      42.65924906730652,
-      13.913358926773071,
-      13.104036808013916,
-      14.0588219165802,
-      23.126128911972046,
-      13.554072141647339
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 23.126128911972046
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 13.554072141647339
-      }
-    ]
-  },
-  "31": {
-    "question": "언제쯤 작업을 다 끝낼 것 같나요?",
-    "answer": "When do you think you will get the work finished?",
-    "correct_streak": 0,
-    "stage": 2,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      25.134249210357666,
-      29.72266387939453,
-      17.94688105583191,
-      16.69473695755005,
-      28.237298011779785,
-      14.320075988769531,
-      33.409767150878906,
-      18.62880277633667,
-      12.160474061965942,
-      14.908749103546143,
-      10.939782857894897,
-      17.721358060836792
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 33.409767150878906
-      },
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 17.721358060836792
-      }
-    ]
-  },
-  "32": {
-    "question": "선생님은 Jim한테 내 숙제를 도와주라고 하셨다.",
-    "answer": "My teacher got Jim to help me with my homework.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "O",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-24",
-    "response_times": [
-      30.658605098724365,
-      14.495864868164062,
-      16.76667094230652,
-      15.167023181915283,
-      13.591418981552124
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-25",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 15.167023181915283
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 13.591418981552124
-      }
-    ]
-  },
-  "33": {
-    "question": "하루 종일 비가 내린다.",
-    "answer": "The rain has been falling all day.",
-    "correct_streak": 0,
-    "stage": 2,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-25",
-    "response_times": [
-      33.866764068603516,
-      29.29356813430786,
-      44.50519776344299,
-      10.286770820617676,
-      9.615081071853638
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 9.615081071853638
-      }
-    ]
-  },
-  "34": {
-    "question": "엄마는 물잔에 손을 뻗다가 넘어지셨다.",
-    "answer": "My mom fell as she reached for the glass.",
-    "correct_streak": 0,
-    "stage": 2,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-25",
-    "response_times": [
-      35.943511962890625,
-      73.2090470790863,
-      14.424638986587524,
-      13.55925703048706,
-      15.14908480644226
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 15.14908480644226
-      }
-    ]
-  },
-  "35": {
-    "question": "그녀는 항상 자정이 되지 전에 잠이 든다.",
-    "answer": "She always falls asleep before midnight.",
-    "correct_streak": 0,
-    "stage": 2,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-25",
-    "response_times": [
-      66.5545699596405,
-      15.767065286636353,
-      26.098335027694702,
-      14.900466918945312,
-      19.52710795402527
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 19.52710795402527
-      }
-    ]
-  },
-  "36": {
-    "question": "올해는 자동차 업계 매출이 떨어질 것으로 전망된다.",
-    "answer": "The sales in the automotive industry are expected to fall this year.",
-    "correct_streak": 0,
-    "stage": 3,
-    "next_review": "2025-07-30",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-25",
-    "response_times": [
-      52.40548586845398,
-      29.771010160446167,
-      19.216503143310547,
-      50.74989604949951,
-      36.61197590827942,
-      27.649780988693237,
-      18.619369983673096,
-      34.97647190093994,
-      19.01493501663208
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 4,
-        "response_time": 34.97647190093994
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 3,
-        "actual_interval": 3,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 19.01493501663208
-      }
-    ]
-  },
-  "37": {
-    "question": "최근 내린 비로 기온이 떨어질 것이다.",
-    "answer": "The temperatures are going to fall due to the resent rainfall.",
-    "correct_streak": 0,
-    "stage": 2,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "X",
-      "O",
-      "X",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-25",
-    "response_times": [
-      50.89240503311157,
-      20.019174098968506,
-      22.374487161636353,
-      40.01629996299744,
-      73.90943002700806,
-      62.26550507545471,
-      15.521575212478638,
-      24.852108001708984,
-      46.887645959854126,
-      19.97921109199524,
-      22.66581916809082
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 22.66581916809082
-      }
-    ]
-  },
-  "38": {
-    "question": "내린 눈이 가파른 산의 측면에 쌓이게 되면 경사면 전체가 갑자기 허물어져 산 아래로 미끄러져 내려갈 수 있는데 시간당 최고 200 마일의 속도로 내려갑니다.",
-    "answer": "When snowfall builds up on a steep mountainside, a whole section of a slope may break loose suddenly and slide down the mountain, moving at speeds of up to 200 miles per hour.",
-    "correct_streak": 0,
-    "stage": 2,
-    "next_review": "2025-07-29",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "X",
-      "X",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-25",
-    "response_times": [
-      123.49595808982849,
-      160.602126121521,
-      62.55616784095764,
-      61.36484718322754,
-      176.3812379837036,
-      52.63293266296387,
-      55.2453031539917,
-      60.2769980430603,
-      46.25520205497742,
-      70.41176009178162,
-      66.90715479850769,
-      52.62104916572571,
-      46.9794499874115,
-      86.15830087661743
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 70.41176009178162
-      },
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 86.15830087661743
-      }
-    ]
-  },
-  "39": {
-    "question": "눈 사태로 인해 사망하는 에베레스트산 등반객이 가장 많죠.",
-    "answer": "More climbers on Mount Everest are killed by avalanches than by anything else.",
-    "correct_streak": 0,
-    "stage": 2,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-25",
-    "response_times": [
-      82.68231511116028,
-      51.36591196060181,
-      34.745014905929565,
-      30.202253103256226,
-      53.38248014450073,
-      25.843385934829712,
-      74.79161977767944,
-      33.004514932632446
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 33.004514932632446
-      }
-    ]
-  },
-  "40": {
-    "question": "에베레스트산은 너무 높아서 제트 기류에 영향을 받습니다. 이것은 폭이 좁고 빠르게 움직이는 기류로 해수면으로부터 6~10마일 위에서 지구를 돌고 있어요.",
-    "answer": "Mount Everest is so tall that it is affected by jet stream, a narrow, fast-moving air current that circles the world six to ten miles above sea level.",
-    "correct_streak": 0,
-    "stage": 2,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "X",
-      "X",
-      "X",
-      "X",
-      "X",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-25",
-    "response_times": [
-      131.25067710876465,
-      77.51112079620361,
-      79.50174379348755,
-      92.12769913673401,
-      51.14069604873657,
-      62.27053427696228,
-      69.37318706512451,
-      61.419418811798096,
-      48.31788897514343,
-      41.73214101791382,
-      51.72949719429016,
-      39.918984174728394,
-      44.22305488586426
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-26",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 44.22305488586426
-      }
-    ]
-  },
-  "41": {
-    "question": "내 핸드폰이 바닥에 떨어져서 부서졌다.",
-    "answer": "My mobile phone fell to the floor and broke.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-26",
-    "response_times": [
-      60.469484090805054,
-      17.947930097579956,
-      28.69590997695923,
-      20.23388123512268,
-      22.757142782211304,
-      15.948975086212158,
-      14.9145028591156,
-      16.50878596305847
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 22.757142782211304
-      }
-    ]
-  },
-  "42": {
-    "question": "잭은 넘어져 다리가 부서졌다.",
-    "answer": "Jack fell and broke his leg.",
-    "correct_streak": 0,
-    "stage": 2,
-    "next_review": "2025-07-29",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-26",
-    "response_times": [
-      34.89203500747681,
-      17.61886501312256,
-      8.645259857177734,
-      14.770092964172363,
-      32.62064290046692
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 32.62064290046692
-      }
-    ]
-  },
-  "43": {
-    "question": "폭풍이 몰아칠 때 배에 묶어 둔 줄이 느슨해졌다.",
-    "answer": "The boat broke loose during the storm.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-26",
-    "response_times": [
-      35.97138690948486,
-      67.96681499481201,
-      29.805135011672974,
-      12.05867600440979,
-      14.82904601097107,
-      10.63302493095398,
-      19.52051091194153,
-      23.19422221183777,
-      12.932543992996216,
-      10.438809156417847,
-      15.114562034606934
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 19.52051091194153
-      }
-    ]
-  },
-  "44": {
-    "question": "그들은 금고를 부숴 열었다.",
-    "answer": "They broke the safe open.",
-    "correct_streak": 0,
-    "stage": 2,
-    "next_review": "2025-07-29",
-    "status": "review",
-    "history": [
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-26",
-    "response_times": [
-      26.292459964752197,
-      44.26270079612732,
-      12.611711025238037,
-      13.47216010093689
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 13.47216010093689
-      }
-    ]
-  },
-  "45": {
-    "question": "이 정적을 깨뜨려 줄 사람이 필요하군요.",
-    "answer": "We need someone to break the silence.",
-    "correct_streak": 0,
-    "stage": 2,
-    "next_review": "2025-07-29",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-26",
-    "response_times": [
-      30.209223747253418,
-      19.423969984054565,
-      12.84834909439087,
-      10.432546138763428,
-      30.47894811630249
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 2,
-        "actual_interval": 2,
-        "is_correct": true,
-        "r": 5,
-        "response_time": 30.47894811630249
-      }
-    ]
-  },
-  "46": {
-    "question": "그는 결국 나와 한 약속을 깨뜨렸다.",
-    "answer": "He has finally broken his promise to me.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-26",
-    "response_times": [
-      23.3958420753479,
-      14.57054328918457,
-      22.57129192352295,
-      12.411696672439575,
-      13.747311115264893,
-      28.475372076034546,
-      26.724670886993408,
-      15.605876207351685,
-      36.14301609992981,
-      14.169628143310547,
-      10.816162109375
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 28.475372076034546
-      }
-    ]
-  },
-  "47": {
-    "question": "법을 어긴 사람은 누구든 처벌을 받게 된다.",
-    "answer": "Anyone who break the law will be subject to punishment.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-26",
-    "response_times": [
-      28.734031200408936,
-      45.73294401168823,
-      70.03209280967712,
-      27.84554696083069,
-      16.600036144256592,
-      15.202073097229004,
-      14.68680715560913,
-      35.72571277618408,
-      18.515284061431885,
-      15.937798738479614,
-      15.723373174667358
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 35.72571277618408
-      }
-    ]
-  },
-  "48": {
-    "question": "비용을 교통비, 식대, 숙박비로 나눠 보죠.",
-    "answer": "Let me break the cost down into transportation, food, and hotel.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-26",
-    "response_times": [
-      36.73638296127319,
-      50.525386810302734,
-      16.744303226470947,
-      22.3348548412323,
-      14.902676820755005,
-      19.947155952453613,
-      14.286902904510498,
-      21.81825876235962,
-      23.402096033096313,
-      19.663960933685303,
-      12.126928091049194,
-      11.802669048309326
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 21.81825876235962
-      }
-    ]
-  },
-  "49": {
-    "question": "추문이 돌자 그의 행복한 결혼생활도 끝났다.",
-    "answer": "His happy marriage came to an end when the scandal broke.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-26",
-    "response_times": [
-      86.63551211357117,
-      38.28071999549866,
-      33.618720054626465,
-      28.628674030303955,
-      22.757951974868774,
-      15.798903942108154,
-      44.68110513687134,
-      36.33191394805908,
-      22.274433135986328,
-      18.60539412498474
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 44.68110513687134
-      }
-    ]
-  },
-  "50": {
-    "question": "어느 신문사에서 이 기사를 터뜨렸는지 알아요?",
-    "answer": "Do you know which newspapers broke the story?",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "O",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-26",
-    "response_times": [
-      33.002108097076416,
-      23.664119005203247,
-      26.425221920013428,
-      14.864901304244995,
-      13.932360887527466,
-      26.39740490913391,
-      19.66828489303589,
-      15.542864322662354,
-      16.051483154296875
-    ],
-    "error_ratios": [],
-    "review_log": [
-      {
-        "date": "2025-07-27",
-        "scheduled_interval": 0,
-        "actual_interval": 0,
-        "is_correct": false,
-        "r": 0,
-        "response_time": 26.39740490913391
-      }
-    ]
-  },
-  "51": {
-    "question": "차가 도로에서 미끄러져 나가 바리케이드를 부딪쳤다.",
-    "answer": "A car slide off the road and hit a barricade.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-27",
-    "response_times": [
-      25.20917820930481,
-      17.90665316581726,
-      21.07225775718689,
-      22.26386284828186,
-      12.439046144485474,
-      11.231130838394165
-    ],
-    "error_ratios": []
-  },
-  "52": {
-    "question": "문이 미끄러져 저절로 열였다.",
-    "answer": "The door was sliding open of itself.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-27",
-    "response_times": [
-      11.787944793701172,
-      11.578654050827026,
-      18.432121992111206,
-      13.60018801689148
-    ],
-    "error_ratios": []
-  },
-  "53": {
-    "question": "난간을 손으로 훑지 마세요. 다칠 수도 있습니다.",
-    "answer": "Don't slide your hand along the rail-It may hurt you.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "O",
-      "O",
-      "X",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-27",
-    "response_times": [
-      89.93091607093811,
-      19.261062145233154,
-      14.846015930175781,
-      11.486775159835815,
-      13.810664892196655,
-      23.97784399986267
-    ],
-    "error_ratios": []
-  },
-  "54": {
-    "question": "그는 보스가 다가오는 것을 봤고 서랍을 조용히 닫았다.",
-    "answer": "He noticed his boss coming and quietly slid the drawer shut.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "X",
-      "O",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-27",
-    "response_times": [
-      25.806218147277832,
-      21.988293170928955,
-      22.292865991592407,
-      22.264243125915527,
-      23.45041275024414,
-      23.07740068435669,
-      17.02838683128357,
-      14.857280731201172
-    ],
-    "error_ratios": []
-  },
-  "55": {
-    "question": "그들은 잠자리에 들었고 바로 잠이 들었다.",
-    "answer": "They slid into bed and fell asleep at once.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "O",
-      "O",
-      "X",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-27",
-    "response_times": [
-      27.78983998298645,
-      35.594220876693726,
-      19.15456795692444,
-      17.237722158432007,
-      30.460150003433228,
-      26.67120385169983,
-      41.765275955200195,
-      15.9621102809906,
-      10.330074787139893
-    ],
-    "error_ratios": []
-  },
-  "56": {
-    "question": "그는 편지봉투를 주머니에서 재빨리 집어 넣었다.",
-    "answer": "He was sliding the envelop into his pocket.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-27",
-    "response_times": [
-      24.76974320411682,
-      28.354680061340332,
-      24.561380863189697,
-      16.73948907852173,
-      14.594238042831421
-    ],
-    "error_ratios": []
-  },
-  "57": {
-    "question": "출산율이 최저치로 내려갔다.",
-    "answer": "The birth rate has slid to the lowest level.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-27",
-    "response_times": [
-      25.642663717269897,
-      22.384593963623047,
-      15.918360233306885,
-      14.458355903625488,
-      14.953648805618286
-    ],
-    "error_ratios": []
-  },
-  "58": {
-    "question": "세계 경제가 불황에 빠져들고 있다.",
-    "answer": "The world economy is sliding into recession.",
-    "correct_streak": 0,
-    "stage": 1,
-    "next_review": "2025-07-28",
-    "status": "review",
-    "history": [
-      "X",
-      "X",
-      "O",
-      "O",
-      "O"
-    ],
-    "postponed": false,
-    "created_at": "2025-07-27",
-    "response_times": [
-      35.496142625808716,
-      22.51001000404358,
-      12.291152954101562,
-      16.496820211410522,
-      21.410128831863403
-    ],
-    "error_ratios": []
+  "daily_stats": {
+    "2025-07-27": 0
   }
 }
