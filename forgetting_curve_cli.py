@@ -1,4 +1,4 @@
-#!/Users/ibyeogsong/miniconda3/bin/python
+#!/usr/bin/env python3
 """
 Spaced Repetition CLI for Memorization Using the Forgetting Curve
 
