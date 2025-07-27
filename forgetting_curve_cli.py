@@ -183,7 +183,12 @@ def add_new_items(items, daily_stats, filename=None):
             if q == "":
                 break
             a = get_input_func()("Answer: ").strip()
-            item_id = str(len(items))
+            # Find the next available item_id
+            if items:
+                max_id = max(int(k) for k in items.keys() if k.isdigit())
+                item_id = str(max_id + 1)
+            else:
+                item_id = "0"
             items[item_id] = {
                 "question": q,
                 "answer": a,
