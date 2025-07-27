@@ -538,10 +538,14 @@ def main():
     elapsed_today = daily_stats.get(DATE_TODAY, 0)
 
     # Reset postponed status for items from previous days
+    postponed_status_changed = False
     for item_id, item in items.items():
         if item.get("postponed", False) and item.get("last_processed_date") != DATE_TODAY:
             item["postponed"] = False
-    save_data(items, daily_stats)
+            postponed_status_changed = True
+    
+    if postponed_status_changed:
+        save_data(items, daily_stats)
     # Show how many review items are scheduled today
     today_review_count = sum(1 for v in items.values() if v['status'] == 'review' and v['next_review'] <= DATE_TODAY)
     print(f"\n🗓️  You have {today_review_count} item(s) scheduled for review today.")
