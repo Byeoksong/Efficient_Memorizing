@@ -67,6 +67,12 @@
 
 ## 기타 명령어
 
+*   **도움말 확인:**
+    ```bash
+    python forgetting_curve_cli.py --help
+    ```
+    사용 가능한 모든 명령줄 옵션과 대화형 세션 중 사용할 수 있는 명령에 대한 설명을 표시합니다.
+
 *   **오늘의 학습 일정 확인:**
     ```bash
     python forgetting_curve_cli.py -today
