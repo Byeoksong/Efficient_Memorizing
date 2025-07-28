@@ -413,7 +413,6 @@ def test_items(items, elapsed_today, daily_stats):
                 item['history'].append('X')
                 print("❌ Incorrect.")
                 print(highlight_differences(user_answer, item['answer']))
-                print(f"Correct answer: {item['answer']}")
                 speak(item['answer'])
                 get_input_func()("Press Enter to continue...")
                 item['correct_streak'] = max(0, item['correct_streak'] - 1)
@@ -520,7 +519,6 @@ def update_review_items(items, elapsed_today, daily_stats):
             item['history'].append('X')
             print("❌ Incorrect.")
             print(highlight_differences(user_answer, item['answer']))
-            print(f"Correct answer: {item['answer']}")
             speak(item['answer'])
             get_input_func()("Press Enter to continue...")
             item['status'] = "learning"
