@@ -567,7 +567,13 @@ def main():
     runs learning and review sessions, and displays statistics and completion messages.
     """
     parser = argparse.ArgumentParser(
-        description="Spaced Repetition CLI for Memorization Using the Forgetting Curve."
+        description="Spaced Repetition CLI for Memorization Using the Forgetting Curve.",
+        epilog="""Interactive Commands (during learning/review sessions):
+  !edit_now      Edit the current question or answer.
+  !edit_before   Edit the previous question or answer.
+  !pause         Pause the current session and save progress.
+""",
+        formatter_class=argparse.RawTextHelpFormatter
     )
     parser.add_argument(
         "filename",
