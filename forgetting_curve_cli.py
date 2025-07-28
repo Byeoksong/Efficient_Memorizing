@@ -96,7 +96,22 @@ def highlight_differences(user_answer, correct_answer):
     highlight_line = f"{' ' * (max_label_len + 1)}{''.join(highlight)}"
     correct_line = f"{correct_label.ljust(max_label_len)} {correct_answer}"
 
-    return f"{user_line}\n{highlight_line}\n{correct_line}"
+    return f"{user_line}\n{highlight_line}\n{correct_line}"""
+
+def display_progress(current, total, bar_length=20):
+    """
+    Displays a progress bar.
+    """
+    if total == 0:
+        return "[No items]"
+    
+    progress = (current / total)
+    filled_length = int(bar_length * progress)
+    bar = '█' * filled_length + '-' * (bar_length - filled_length)
+    return f"[{bar}] {current}/{total} items"
+
+DATA_FILE = Path("memory_data.json")
+
 
 DATA_FILE = Path("memory_data.json")
 FORGETTING_SCHEDULE = [1, 2, 3, 7, 15, 30, 60, 90, 120]  # days
@@ -363,10 +378,11 @@ def test_items(items, elapsed_today, daily_stats):
             break
 
         random.shuffle(learning_keys)
-        previous_key = None
-        for key in learning_keys:
+        total_learning_items = len(learning_keys)
+        for i, key in enumerate(learning_keys):
             clear_screen()
             item = items[key]
+            print(display_progress(i + 1, total_learning_items))
             print("")
             print(f"[Q] {item['question']}")
             start_time = time.time()
@@ -444,9 +460,11 @@ def update_review_items(items, elapsed_today, daily_stats):
     if review_targets:
         print("\n✨ Starting review session. Press Enter to begin...")
         get_input_func()("")
-    for key in review_targets:
+    total_review_items = len(review_targets)
+    for i, key in enumerate(review_targets):
         clear_screen()
         item = items[key]
+        print(display_progress(i + 1, total_review_items))
         print("")
         print(f"[Review] {item['question']}")
         start_time = time.time()
