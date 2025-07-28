@@ -4,6 +4,7 @@ __pycache__/
 
 # Temporary files
 temp_answer.mp3
+task.txt
 
 # Agent logs
 AGENT_LOG.md.bak

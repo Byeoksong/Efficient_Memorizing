@@ -168,6 +168,9 @@ def add_new_items(items, daily_stats, filename=None):
         items (dict): The existing memory data to update.
         daily_stats (dict): The daily statistics to update.
         filename (str, optional): Path to a file containing Q&A pairs.
+    
+    Returns:
+        bool: True if items were added from a file, False otherwise.
     """
     if filename:
         try:
@@ -175,7 +178,7 @@ def add_new_items(items, daily_stats, filename=None):
                 lines = [line.strip() for line in f if line.strip()]
             if len(lines) % 2 != 0:
                 print("❌ The input file must contain pairs of lines (question followed by answer).")
-                return
+                return False
             items_added_from_file = False
             for i in range(0, len(lines), 2):
                 q = lines[i]
@@ -203,8 +206,10 @@ def add_new_items(items, daily_stats, filename=None):
             if items_added_from_file:
                 print(f"✅ Added {len(lines)//2} Q&A pairs from {filename}")
                 save_data(items, daily_stats)
+                return True
         except Exception as e:
             print(f"❌ Failed to load from {filename}: {e}")
+        return False
     else:
         print("📚 Enter new Q&A pairs. Press Enter without typing a question to finish.")
         items_added_interactively = False
@@ -236,6 +241,7 @@ def add_new_items(items, daily_stats, filename=None):
             items_added_interactively = True
         if items_added_interactively:
             save_data(items, daily_stats)
+    return False
 
 def edit_item(items, daily_stats, item_id):
     """
@@ -608,7 +614,10 @@ def main():
         save_data(items, daily_stats)
         sys.exit()
     filename = sys.argv[1] if len(sys.argv) > 1 else None
-    add_new_items(items, daily_stats, filename)
+    items_added = add_new_items(items, daily_stats, filename)
+    if items_added:
+        get_input_func()("Press Enter to start the learning session...")
+
     elapsed_today = test_items(items, elapsed_today, daily_stats)
     elapsed_today = update_review_items(items, elapsed_today, daily_stats)
     show_statistics(items)
