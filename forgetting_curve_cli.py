@@ -29,6 +29,7 @@ import platform
 import matplotlib.pyplot as plt
 from prompt_toolkit import prompt
 from gtts import gTTS
+import argparse
 
 def clear_screen():
     """Clears the terminal screen."""
@@ -565,6 +566,31 @@ def main():
     Loads data, handles command-line arguments for adding new items or showing today's summary,
     runs learning and review sessions, and displays statistics and completion messages.
     """
+    parser = argparse.ArgumentParser(
+        description="Spaced Repetition CLI for Memorization Using the Forgetting Curve."
+    )
+    parser.add_argument(
+        "filename",
+        nargs="?",
+        help="Path to a file containing Q&A pairs to add (e.g., task.txt)."
+    )
+    parser.add_argument(
+        "-today",
+        action="store_true",
+        help="Show today's scheduled review and learning items."
+    )
+    parser.add_argument(
+        "-tomorrow",
+        action="store_true",
+        help="Show tomorrow's scheduled review and learning items."
+    )
+    parser.add_argument(
+        "-delete-today",
+        action="store_true",
+        help="Delete all items created today."
+    )
+    args = parser.parse_args()
+
     import time
     print("\n📖 Spaced Repetition CLI — Memorize with the Forgetting Curve!")
     print(f"\n⚙️ Current Settings:")
@@ -588,23 +614,21 @@ def main():
     today_review_count = sum(1 for v in items.values() if v['status'] == 'review' and v['next_review'] <= DATE_TODAY)
     print(f"\n🗓️  You have {today_review_count} item(s) scheduled for review today.")
 
-    # Handle -delete-today argument to remove items created today
-    if len(sys.argv) > 1 and sys.argv[1] == "-delete-today":
+    # Handle arguments
+    if args.delete_today:
         original_len = len(items)
         items = {k: v for k, v in items.items() if v.get("created_at") != DATE_TODAY}
         print(f"🗑️ Deleted {original_len - len(items)} items created today.")
         save_data(items, daily_stats)
         sys.exit()
-    # Handle -today argument for quick summary and exit
-    if len(sys.argv) > 1 and sys.argv[1] == "-today":
+    if args.today:
         review_today = [v for v in items.values() if v['status'] == 'review' and v['next_review'] <= DATE_TODAY]
         learning_today = get_learning_items(items)
         print(f"\n📌 Today's scheduled items:")
         print(f"🔁 Review items: {len(review_today)}")
         print(f"🆕 Learning items: {len(learning_today)}")
         sys.exit()
-    # Handle -tomorrow argument for quick tomorrow's summary and exit
-    if len(sys.argv) > 1 and sys.argv[1] == "-tomorrow":
+    if args.tomorrow:
         tomorrow = str(datetime.date.fromisoformat(DATE_TODAY) + datetime.timedelta(days=1))
         review_tomorrow = [v for v in items.values() if v['status'] == 'review' and v['next_review'] == tomorrow]
         learning_tomorrow = [k for k, v in items.items() if v['status'] == 'learning' and v['created_at'] == tomorrow]
@@ -613,8 +637,8 @@ def main():
         print(f"🆕 Learning items (pre-added for tomorrow): {len(learning_tomorrow)}")
         save_data(items, daily_stats)
         sys.exit()
-    filename = sys.argv[1] if len(sys.argv) > 1 else None
-    items_added = add_new_items(items, daily_stats, filename)
+    
+    items_added = add_new_items(items, daily_stats, args.filename)
     if items_added:
         get_input_func()("Press Enter to start the learning session...")
 
