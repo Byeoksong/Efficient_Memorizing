@@ -116,7 +116,7 @@ DATA_FILE = Path("memory_data.json")
 DATA_FILE = Path("memory_data.json")
 FORGETTING_SCHEDULE = [1, 2, 3, 7, 15, 30, 60, 90, 120]  # days
 REQUIRED_STREAK = 3  # number of consecutive correct answers required
-DAILY_LEARNING_LIMIT = 30  # maximum number of repeated (non-new) items per day
+DAILY_TOTAL_LIMIT = 30  # maximum number of total items (learning + review) per day
 
 # ✅ Manual control for testing
 # ✅ Manual control for testing
@@ -352,18 +352,9 @@ def get_learning_items(data):
     others.sort(key=lambda x: x[1].get("created_at", DATE_TODAY))
 
     all_learning_items = today_new + others
-    allowed_items = all_learning_items[:DAILY_LEARNING_LIMIT]
-    postponed = all_learning_items[DAILY_LEARNING_LIMIT:]
+    return [k for k, _ in all_learning_items]
 
-    # Mark postponed items to avoid testing today
-    for key, item in postponed:
-        item["postponed"] = True
-    for key, item in allowed_items:
-        item["postponed"] = False
-
-    return [k for k, _ in allowed_items]
-
-def test_items(items, elapsed_today, daily_stats):
+def test_items(items, elapsed_today, daily_stats, learning_keys_for_session):
     """
     Conduct testing of learning items, prompting user for answers and updating item states.
 
@@ -375,12 +366,15 @@ def test_items(items, elapsed_today, daily_stats):
         items (dict): The memory data.
         elapsed_today (float): The accumulated time spent today.
         daily_stats (dict): The daily statistics to update.
+        learning_keys_for_session (list): List of item IDs to be tested in this session.
 
     Returns:
         float: The updated accumulated time spent today.
     """
+    previous_key = None # Initialize previous_key
     while True:
-        learning_keys = get_learning_items(items)
+        # Use the provided learning_keys_for_session instead of calling get_learning_items
+        learning_keys = [k for k in learning_keys_for_session if items[k]["status"] == "learning" and not items[k].get("postponed", False)]
         if not learning_keys:
             print("\n🎉 All learning items completed for today (or none allowed today)!")
             break
@@ -447,7 +441,7 @@ def test_items(items, elapsed_today, daily_stats):
         save_data(items, daily_stats)
     return elapsed_today
 
-def update_review_items(items, elapsed_today, daily_stats):
+def update_review_items(items, elapsed_today, daily_stats, review_keys_for_session, learning_keys_for_session):
     """
     Update review items scheduled for today, prompting user and adjusting next review dates.
 
@@ -458,11 +452,13 @@ def update_review_items(items, elapsed_today, daily_stats):
         items (dict): The memory data.
         elapsed_today (float): The accumulated time spent today.
         daily_stats (dict): The daily statistics to update.
+        review_keys_for_session (list): List of item IDs to be reviewed in this session.
+        learning_keys_for_session (list): List of item IDs to be tested in this session (passed for recursive call).
 
     Returns:
         float: The updated accumulated time spent today.
     """
-    review_targets = [k for k, v in items.items() if v['status'] == "review" and v['next_review'] <= DATE_TODAY]
+    review_targets = [k for k in review_keys_for_session if items[k]["status"] == "review" and items[k]["next_review"] <= DATE_TODAY and not items[k].get("postponed", False)]
     random.shuffle(review_targets)
     previous_key = None
     if review_targets:
@@ -562,9 +558,9 @@ def update_review_items(items, elapsed_today, daily_stats):
         previous_key = key
 
     save_data(items, daily_stats)
-    # After updating reviews, test any learning items remaining
-    elapsed_today = test_items(items, elapsed_today, daily_stats)
     return elapsed_today
+
+
 
 
 def show_statistics(items):
@@ -626,9 +622,9 @@ def main():
     print(f"\n⚙️ Current Settings:")
     print(f"   Forgetting Schedule (days): {FORGETTING_SCHEDULE}")
     print(f"   Required Correct Streak: {REQUIRED_STREAK}")
-    print(f"   Daily Learning Limit: {DAILY_LEARNING_LIMIT}")
+    print(f"   DAILY_TOTAL_LIMIT: {DAILY_TOTAL_LIMIT}  # maximum number of total items (learning + review) per day")
     items, daily_stats = load_data()
-    
+
     elapsed_today = daily_stats.get(DATE_TODAY, 0)
 
     # Reset postponed status for items from previous days
@@ -637,26 +633,58 @@ def main():
         if item.get("postponed", False) and item.get("last_processed_date") != DATE_TODAY:
             item["postponed"] = False
             postponed_status_changed = True
-    
+
     if postponed_status_changed:
         save_data(items, daily_stats)
-    # Show how many review items are scheduled today
-    today_review_count = sum(1 for v in items.values() if v['status'] == 'review' and v['next_review'] <= DATE_TODAY)
-    print(f"\n🗓️  You have {today_review_count} item(s) scheduled for review today.")
 
-    # Handle arguments
+    # Handle arguments that exit early
     if args.delete_today:
         original_len = len(items)
         items = {k: v for k, v in items.items() if v.get("created_at") != DATE_TODAY}
         print(f"🗑️ Deleted {original_len - len(items)} items created today.")
         save_data(items, daily_stats)
         sys.exit()
+
+    # Get all due learning items (without internal limit)
+    all_due_learning_keys = get_learning_items(items)
+    # Get all due review items
+    all_due_review_keys = [k for k, v in items.items() if v['status'] == 'review' and v['next_review'] <= DATE_TODAY]
+
+    # Combine and sort items based on priority: new learning > old learning > review
+    combined_due_items = []
+    # Add new learning items (created today)
+    for key in all_due_learning_keys:
+        if items[key].get("created_at") == DATE_TODAY:
+            combined_due_items.append((key, items[key]))
+    # Add older learning items
+    for key in all_due_learning_keys:
+        if items[key].get("created_at") != DATE_TODAY:
+            combined_due_items.append((key, items[key]))
+    # Add review items
+    for key in all_due_review_keys:
+        combined_due_items.append((key, items[key]))
+
+    # Apply DAILY_TOTAL_LIMIT
+    for i, (key, item) in enumerate(combined_due_items):
+        if i < DAILY_TOTAL_LIMIT:
+            item["postponed"] = False
+        else:
+            item["postponed"] = True
+    save_data(items, daily_stats) # Save postponed status
+
+    # Filter items for today's session based on postponed status
+    learning_keys_for_session = [k for k, v in items.items() if v['status'] == 'learning' and not v.get('postponed', False)]
+    review_keys_for_session = [k for k, v in items.items() if v['status'] == 'review' and v['next_review'] <= DATE_TODAY and not v.get('postponed', False)]
+
+    # Show how many review items are scheduled today
+    print(f"\n🗓️  You have {len(review_keys_for_session)} item(s) scheduled for review today.")
+    print(f"🆕 You have {len(learning_keys_for_session)} new learning item(s) for today.")
+
+
     if args.today:
-        review_today = [v for v in items.values() if v['status'] == 'review' and v['next_review'] <= DATE_TODAY]
-        learning_today = get_learning_items(items)
         print(f"\n📌 Today's scheduled items:")
-        print(f"🔁 Review items: {len(review_today)}")
-        print(f"🆕 Learning items: {len(learning_today)}")
+        print(f"🔁 Review items: {len(review_keys_for_session)}")
+        print(f"🆕 Learning items: {len(learning_keys_for_session)}")
         sys.exit()
     if args.tomorrow:
         tomorrow = str(datetime.date.fromisoformat(DATE_TODAY) + datetime.timedelta(days=1))
@@ -665,17 +693,30 @@ def main():
         print(f"\n🔮 Tomorrow's scheduled items:")
         print(f"🔁 Review items: {len(review_tomorrow)}")
         print(f"🆕 Learning items (pre-added for tomorrow): {len(learning_tomorrow)}")
-        save_data(items, daily_stats)
-        sys.exit()
-    
+        # No sys.exit() here, as per user's request to continue flow after displaying tomorrow's items.
+
     items_added = add_new_items(items, daily_stats, args.filename)
     if items_added:
         get_input_func()("Press Enter to start the learning session...")
 
-    elapsed_today = test_items(items, elapsed_today, daily_stats)
-    elapsed_today = update_review_items(items, elapsed_today, daily_stats)
+    while True:
+        # Recalculate session items in each iteration to include demoted items
+        learning_keys_for_session = [k for k, v in items.items() if v['status'] == 'learning' and not v.get('postponed', False)]
+        review_keys_for_session = [k for k, v in items.items() if v['status'] == 'review' and v['next_review'] <= DATE_TODAY and not v.get('postponed', False)]
+
+        if not learning_keys_for_session and not review_keys_for_session:
+            break # No more items to process
+
+        # Prioritize learning items if any
+        if learning_keys_for_session:
+            elapsed_today = test_items(items, elapsed_today, daily_stats, learning_keys_for_session)
+        
+        # Then process review items
+        if review_keys_for_session:
+            elapsed_today = update_review_items(items, elapsed_today, daily_stats, review_keys_for_session, learning_keys_for_session)
+
     show_statistics(items)
-    
+
     daily_stats[DATE_TODAY] = elapsed_today
     save_data(items, daily_stats)
 
@@ -686,3 +727,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
