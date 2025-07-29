@@ -351,16 +351,17 @@ def get_learning_items(data):
     ]
     others.sort(key=lambda x: x[1].get("created_at", DATE_TODAY))
 
-    allowed_others = others[:DAILY_LEARNING_LIMIT]
-    postponed = others[DAILY_LEARNING_LIMIT:]
+    all_learning_items = today_new + others
+    allowed_items = all_learning_items[:DAILY_LEARNING_LIMIT]
+    postponed = all_learning_items[DAILY_LEARNING_LIMIT:]
 
     # Mark postponed items to avoid testing today
     for key, item in postponed:
         item["postponed"] = True
-    for key, item in allowed_others + today_new:
+    for key, item in allowed_items:
         item["postponed"] = False
 
-    return [k for k, _ in today_new + allowed_others]
+    return [k for k, _ in allowed_items]
 
 def test_items(items, elapsed_today, daily_stats):
     """
