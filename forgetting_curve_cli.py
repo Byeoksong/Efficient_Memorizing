@@ -119,7 +119,14 @@ REQUIRED_STREAK = 3  # number of consecutive correct answers required
 DAILY_LEARNING_LIMIT = 30  # maximum number of repeated (non-new) items per day
 
 # ✅ Manual control for testing
-DATE_TODAY = str(datetime.date.today())
+# ✅ Manual control for testing
+# DATE_TODAY = str(datetime.date.today())
+# Calculate DATE_TODAY based on a 3 AM boundary
+now = datetime.datetime.now()
+if now.hour < 3:
+    DATE_TODAY = str((now - datetime.timedelta(days=1)).date())
+else:
+    DATE_TODAY = str(now.date())
 SHOW_HISTORY = False
 
 # Load or initialize memory data
