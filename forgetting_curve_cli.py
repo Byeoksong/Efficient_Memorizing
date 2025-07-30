@@ -700,7 +700,33 @@ def main():
         get_input_func()("Press Enter to start the learning session...")
 
     while True:
-        # Recalculate session items in each iteration to include demoted items
+        # 1. Collect all currently due learning and review items
+        all_due_learning_keys = get_learning_items(items)
+        all_due_review_keys = [k for k, v in items.items() if v['status'] == 'review' and v['next_review'] <= DATE_TODAY]
+
+        # 2. Combine and sort items based on priority: new learning > old learning > review
+        combined_due_items = []
+        # Add new learning items (created today)
+        for key in all_due_learning_keys:
+            if items[key].get("created_at") == DATE_TODAY:
+                combined_due_items.append((key, items[key]))
+        # Add older learning items
+        for key in all_due_learning_keys:
+            if items[key].get("created_at") != DATE_TODAY:
+                combined_due_items.append((key, items[key]))
+        # Add review items
+        for key in all_due_review_keys:
+            combined_due_items.append((key, items[key]))
+
+        # 3. Apply DAILY_TOTAL_LIMIT to the combined list
+        for i, (key, item) in enumerate(combined_due_items):
+            if i < DAILY_TOTAL_LIMIT:
+                item["postponed"] = False
+            else:
+                item["postponed"] = True
+        # No need to save_data here, as it will be saved after test_items/update_review_items
+
+        # 4. Filter items for today's session based on updated postponed status
         learning_keys_for_session = [k for k, v in items.items() if v['status'] == 'learning' and not v.get('postponed', False)]
         review_keys_for_session = [k for k, v in items.items() if v['status'] == 'review' and v['next_review'] <= DATE_TODAY and not v.get('postponed', False)]
 
@@ -714,6 +740,12 @@ def main():
         # Then process review items
         if review_keys_for_session:
             elapsed_today = update_review_items(items, elapsed_today, daily_stats, review_keys_for_session, learning_keys_for_session)
+
+        # After processing, save data to ensure postponed status is persisted
+        save_data(items, daily_stats)
+
+        # After processing, save data to ensure postponed status is persisted
+        save_data(items, daily_stats)
 
     show_statistics(items)
 
