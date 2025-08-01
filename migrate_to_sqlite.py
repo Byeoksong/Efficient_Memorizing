@@ -16,8 +16,8 @@ def migrate():
         return
 
     if os.path.exists(DB_FILE):
-        print(f"Warning: {DB_FILE} already exists. Skipping migration to avoid overwriting.")
-        return
+        os.remove(DB_FILE)
+        print(f"Existing {DB_FILE} removed.")
 
     # Connect to SQLite database
     conn = sqlite3.connect(DB_FILE)
@@ -83,18 +83,18 @@ def migrate():
             INSERT INTO items (item_id, question, answer, stage, correct_streak, next_review_date, last_processed_date, postponed, created_at, updated_at, status, history, response_times, error_ratios, review_log)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
-                item_id,
+                int(item_id),
                 item_data.get('question'),
                 item_data.get('answer'),
                 item_data.get('stage'),
                 item_data.get('correct_streak'),
-                item_data.get('next_review'), # Changed from next_review_date
+                item_data.get('next_review'),
                 item_data.get('last_processed_date'),
-                1 if item_data.get('postponed') else 0,
+                1 if item_data.get('postponed', False) else 0,
                 item_data.get('created_at'),
                 item_data.get('updated_at'),
                 item_data.get('status'),
-                json.dumps(item_data.get('history', [])), # Serialize list to string
+                json.dumps(item_data.get('history', [])),
                 json.dumps(item_data.get('response_times', [])),
                 json.dumps(item_data.get('error_ratios', [])),
                 json.dumps(item_data.get('review_log', []))

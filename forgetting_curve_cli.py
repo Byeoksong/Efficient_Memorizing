@@ -468,12 +468,12 @@ def update_review_items(elapsed_today, review_keys_for_session):
                 })
 
                 next_day = today + datetime.timedelta(days=final_interval)
-                cursor.execute("""UPDATE items SET stage = ?, next_review_date = ?, history = ?, response_times = ?, review_log = ? WHERE item_id = ?""", 
-                               (new_stage, str(next_day), json.dumps(history), json.dumps(response_times), json.dumps(review_log), key))
+                cursor.execute("""UPDATE items SET stage = ?, next_review_date = ?, history = ?, response_times = ?, review_log = ?, last_processed_date = ? WHERE item_id = ?""", 
+                               (new_stage, str(next_day), json.dumps(history), json.dumps(response_times), json.dumps(review_log), DATE_TODAY, key))
                 print(f"📅 Next review scheduled in {final_interval} days.")
             else:
-                cursor.execute("UPDATE items SET next_review_date = 'done', history = ?, response_times = ?, review_log = ? WHERE item_id = ?", 
-                               (json.dumps(history), json.dumps(response_times), json.dumps(review_log), key))
+                cursor.execute("UPDATE items SET next_review_date = 'done', history = ?, response_times = ?, review_log = ?, last_processed_date = ? WHERE item_id = ?", 
+                               (json.dumps(history), json.dumps(response_times), json.dumps(review_log), DATE_TODAY, key))
                 print("🎉 Fully memorized!")
             get_input_func()("Press Enter to continue...")
         else:
@@ -490,8 +490,8 @@ def update_review_items(elapsed_today, review_keys_for_session):
                 "r": r,
                 "response_time": elapsed
             })
-            cursor.execute("""UPDATE items SET status = 'learning', correct_streak = 0, stage = 0, next_review_date = ?, history = ?, response_times = ?, review_log = ? WHERE item_id = ?""", 
-                           (DATE_TODAY, json.dumps(history), json.dumps(response_times), json.dumps(review_log), key))
+            cursor.execute("""UPDATE items SET status = 'learning', correct_streak = 0, stage = 0, next_review_date = ?, history = ?, response_times = ?, review_log = ?, last_processed_date = ? WHERE item_id = ?""", 
+                           (DATE_TODAY, json.dumps(history), json.dumps(response_times), json.dumps(review_log), DATE_TODAY, key))
         previous_key = key
         conn.commit()
 
@@ -594,8 +594,8 @@ def main():
     cursor.execute("SELECT item_id, created_at FROM items WHERE status = 'learning' ORDER BY created_at DESC")
     all_due_learning_keys = [row[0] for row in cursor.fetchall()]
     
-    cursor.execute("SELECT item_id FROM items WHERE status = 'review' AND next_review_date <= ?", (DATE_TODAY,))
-    all_due_review_keys = [row[0] for row in cursor.fetchall()]
+    cursor.execute("SELECT item_id, next_review_date FROM items WHERE status = 'review' AND next_review_date <= ?", (DATE_TODAY,))
+    all_due_review_keys = [row[0] for row in all_due_review_items_with_dates]
 
     # Combine and apply DAILY_TOTAL_LIMIT
     combined_due_keys = all_due_learning_keys + all_due_review_keys
