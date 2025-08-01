@@ -14,3 +14,4 @@ AGENT_LOG.md
 # Backup directory
 BACKUP_DIR/
 memory_data.json
+memory.db
