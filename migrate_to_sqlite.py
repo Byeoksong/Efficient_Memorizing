@@ -38,7 +38,10 @@ def migrate():
         created_at TEXT,
         updated_at TEXT,
         status TEXT,
-        history TEXT
+        history TEXT,
+        response_times TEXT,
+        error_ratios TEXT,
+        review_log TEXT
     )
     """)
 
@@ -72,10 +75,13 @@ def migrate():
             item_data.setdefault('updated_at', item_data.get('updated_at'))
             item_data.setdefault('status', 'learning')
             item_data.setdefault('history', '[]') # Store history as a JSON string
+            item_data.setdefault('response_times', '[]')
+            item_data.setdefault('error_ratios', '[]')
+            item_data.setdefault('review_log', '[]')
 
             cursor.execute("""
-            INSERT INTO items (item_id, question, answer, stage, correct_streak, next_review_date, last_processed_date, postponed, created_at, updated_at, status, history)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO items (item_id, question, answer, stage, correct_streak, next_review_date, last_processed_date, postponed, created_at, updated_at, status, history, response_times, error_ratios, review_log)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 item_id,
                 item_data.get('question'),
@@ -88,7 +94,10 @@ def migrate():
                 item_data.get('created_at'),
                 item_data.get('updated_at'),
                 item_data.get('status'),
-                json.dumps(item_data.get('history', [])) # Serialize list to string
+                json.dumps(item_data.get('history', [])), # Serialize list to string
+                json.dumps(item_data.get('response_times', [])),
+                json.dumps(item_data.get('error_ratios', [])),
+                json.dumps(item_data.get('review_log', []))
             ))
         print(f"Successfully migrated {len(data['items'])} items.")
 

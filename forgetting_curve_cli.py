@@ -143,7 +143,10 @@ def init_db():
         created_at TEXT,
         updated_at TEXT,
         status TEXT DEFAULT 'learning',
-        history TEXT DEFAULT '[]'
+        history TEXT DEFAULT '[]',
+        response_times TEXT DEFAULT '[]',
+        error_ratios TEXT DEFAULT '[]',
+        review_log TEXT DEFAULT '[]'
     )
     """)
     # Create daily_stats table
@@ -185,9 +188,9 @@ def add_new_items(filename=None):
                 q = lines[i]
                 a = lines[i+1]
                 cursor.execute("""
-                INSERT INTO items (question, answer, next_review_date, created_at, status)
-                VALUES (?, ?, ?, ?, ?)
-                """, (q, a, DATE_TODAY, DATE_TODAY, 'learning'))
+                INSERT INTO items (question, answer, next_review_date, created_at, status, response_times, error_ratios, review_log)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """, (q, a, DATE_TODAY, DATE_TODAY, 'learning', json.dumps([]), json.dumps([]), json.dumps([])))
                 items_added = True
 
             if items_added:
@@ -204,9 +207,9 @@ def add_new_items(filename=None):
                 break
             a = get_input_func()("Answer: ").strip()
             cursor.execute("""
-            INSERT INTO items (question, answer, next_review_date, created_at, last_processed_date, status)
-            VALUES (?, ?, ?, ?, ?, ?)
-            """, (q, a, DATE_TODAY, DATE_TODAY, DATE_TODAY, 'learning'))
+            INSERT INTO items (question, answer, next_review_date, created_at, last_processed_date, status, response_times, error_ratios, review_log)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (q, a, DATE_TODAY, DATE_TODAY, DATE_TODAY, 'learning', json.dumps([]), json.dumps([]), json.dumps([])))
             items_added = True
 
     if items_added:
@@ -260,8 +263,6 @@ def estimate_r(item, is_correct, response_time):
             o_streak += 1
         else:
             break
-
-    # The response_times are not stored in the DB in this version for simplicity
 
     if not is_correct:
         return 0
@@ -345,8 +346,10 @@ def test_items(elapsed_today, learning_keys_for_session):
         user_answer = user_input
         is_correct = user_answer.strip().lower() == item['answer'].strip().lower()
         history = json.loads(item['history'])
+        response_times = json.loads(item['response_times'])
+        response_times.append(elapsed)
         r = estimate_r(item, is_correct, elapsed)
-        cursor.execute("UPDATE items SET last_processed_date = ? WHERE item_id = ?", (DATE_TODAY, key))
+        cursor.execute("UPDATE items SET last_processed_date = ?, response_times = ? WHERE item_id = ?", (DATE_TODAY, json.dumps(response_times), key))
 
         if is_correct:
             history.append('O')
@@ -432,6 +435,9 @@ def update_review_items(elapsed_today, review_keys_for_session):
         user_answer = user_input
         is_correct = user_answer.strip().lower() == item['answer'].strip().lower()
         history = json.loads(item['history'])
+        response_times = json.loads(item['response_times'])
+        review_log = json.loads(item['review_log'])
+        response_times.append(elapsed)
         r = estimate_r(item, is_correct, elapsed)
 
         if is_correct:
@@ -442,13 +448,32 @@ def update_review_items(elapsed_today, review_keys_for_session):
             new_stage = item['stage'] + 1
             if new_stage <= len(FORGETTING_SCHEDULE):
                 base_days = FORGETTING_SCHEDULE[new_stage - 1]
-                # ... (rest of the logic for calculating next review date)
-                next_day = datetime.date.fromisoformat(DATE_TODAY) + datetime.timedelta(days=base_days)
-                cursor.execute("UPDATE items SET stage = ?, next_review_date = ?, history = ? WHERE item_id = ?", 
-                               (new_stage, str(next_day), json.dumps(history), key))
-                print(f"📅 Next review scheduled in {base_days} days.")
+                scheduled_date = datetime.date.fromisoformat(item['next_review_date'])
+                today = datetime.date.fromisoformat(DATE_TODAY)
+                days_late = max(0, (today - scheduled_date).days)
+
+                r_factor = max(0.3, math.exp(-0.3 * (5 - r)))
+                adjusted_by_r = base_days * r_factor
+
+                lateness_factor = days_late / base_days if base_days > 0 else 0
+                final_interval = max(1, int(adjusted_by_r * (1 + lateness_factor)))
+
+                review_log.append({
+                    "date": DATE_TODAY,
+                    "scheduled_interval": base_days,
+                    "actual_interval": base_days + days_late,
+                    "is_correct": is_correct,
+                    "r": r,
+                    "response_time": elapsed
+                })
+
+                next_day = today + datetime.timedelta(days=final_interval)
+                cursor.execute("""UPDATE items SET stage = ?, next_review_date = ?, history = ?, response_times = ?, review_log = ? WHERE item_id = ?""", 
+                               (new_stage, str(next_day), json.dumps(history), json.dumps(response_times), json.dumps(review_log), key))
+                print(f"📅 Next review scheduled in {final_interval} days.")
             else:
-                cursor.execute("UPDATE items SET next_review_date = 'done', history = ? WHERE item_id = ?", (json.dumps(history), key))
+                cursor.execute("UPDATE items SET next_review_date = 'done', history = ?, response_times = ?, review_log = ? WHERE item_id = ?", 
+                               (json.dumps(history), json.dumps(response_times), json.dumps(review_log), key))
                 print("🎉 Fully memorized!")
             get_input_func()("Press Enter to continue...")
         else:
@@ -457,8 +482,16 @@ def update_review_items(elapsed_today, review_keys_for_session):
             print(highlight_differences(user_answer, item['answer']))
             speak(item['answer'])
             get_input_func()("Press Enter to continue...")
-            cursor.execute("""UPDATE items SET status = 'learning', correct_streak = 0, stage = 0, next_review_date = ?, history = ? WHERE item_id = ?""", 
-                           (DATE_TODAY, json.dumps(history), key))
+            review_log.append({
+                "date": DATE_TODAY,
+                "scheduled_interval": item['stage'],
+                "actual_interval": (datetime.date.fromisoformat(DATE_TODAY) - datetime.date.fromisoformat(item['next_review_date'])).days,
+                "is_correct": False,
+                "r": r,
+                "response_time": elapsed
+            })
+            cursor.execute("""UPDATE items SET status = 'learning', correct_streak = 0, stage = 0, next_review_date = ?, history = ?, response_times = ?, review_log = ? WHERE item_id = ?""", 
+                           (DATE_TODAY, json.dumps(history), json.dumps(response_times), json.dumps(review_log), key))
         previous_key = key
         conn.commit()
 
