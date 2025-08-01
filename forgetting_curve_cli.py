@@ -595,7 +595,7 @@ def main():
     all_due_learning_keys = [row[0] for row in cursor.fetchall()]
     
     cursor.execute("SELECT item_id, next_review_date FROM items WHERE status = 'review' AND next_review_date <= ?", (DATE_TODAY,))
-    all_due_review_keys = [row[0] for row in all_due_review_items_with_dates]
+    all_due_review_keys = [row[0] for row in cursor.fetchall()]
 
     # Combine and apply DAILY_TOTAL_LIMIT
     combined_due_keys = all_due_learning_keys + all_due_review_keys
@@ -628,6 +628,11 @@ def main():
         print(f"\n🔮 Tomorrow's scheduled items:")
         print(f"🔁 Review items: {review_tomorrow_count}")
         print(f"🆕 Learning items (pre-added for tomorrow): {learning_tomorrow_count}")
+        conn.close()
+        sys.exit()
+
+    if not sys.stdin.isatty():
+        print("\n💡 Not running in an interactive terminal. Exiting after displaying scheduled items.")
         conn.close()
         sys.exit()
 
