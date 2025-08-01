@@ -82,7 +82,7 @@ def migrate():
                 item_data.get('answer'),
                 item_data.get('stage'),
                 item_data.get('correct_streak'),
-                item_data.get('next_review_date'),
+                item_data.get('next_review'), # Changed from next_review_date
                 item_data.get('last_processed_date'),
                 1 if item_data.get('postponed') else 0,
                 item_data.get('created_at'),

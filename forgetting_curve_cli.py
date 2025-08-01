@@ -551,9 +551,10 @@ def main():
         conn.close()
         sys.exit()
 
-    items_added = add_new_items(args.filename)
-    if items_added:
-        get_input_func()("Press Enter to start the learning session...")
+    if args.filename:
+        items_added = add_new_items(args.filename)
+        if items_added:
+            get_input_func()("Press Enter to start the learning session...")
 
 
     # Get all due learning and review items from the database
@@ -594,6 +595,8 @@ def main():
         print(f"\n🔮 Tomorrow's scheduled items:")
         print(f"🔁 Review items: {review_tomorrow_count}")
         print(f"🆕 Learning items (pre-added for tomorrow): {learning_tomorrow_count}")
+        conn.close()
+        sys.exit()
 
     while True:
         # Recalculate session items in each iteration
