@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
-Spaced Repetition CLI for Memorization Using the Forgetting Curve (Refactored)
+Spaced Repetition CLI for Memorization Using the Forgetting Curve
 
-This script implements a command-line interface tool to help users memorize
-information effectively. It is refactored to use a class-based structure
-for better maintainability and clarity, with database operations handled
-by a separate DBManager.
+This script provides a command-line interface to help users memorize
+information effectively using the spaced repetition technique.
+
+The application is built with a class-based structure for clarity and
+maintainability, and it delegates all database operations to a dedicated
+DBManager class.
 """
 import argparse
 import datetime
