@@ -182,6 +182,7 @@ class SpacedRepetitionApp:
 
         print(f"\n📚 Starting learning session for {len(learning_ids)} new items. (Required streak: {self.REQUIRED_STREAK})")
         get_input_func()("Press Enter to start...")
+        print(learning_ids)
         self._process_session(learning_ids, self._handle_learning_answer)
 
     def _run_review_session(self):
@@ -237,21 +238,35 @@ class SpacedRepetitionApp:
             previous_key = item_id
             get_input_func()("\nPress Enter to continue...")
 
-    # FIX 2: Add 'user_answer' parameter to the signature
     def _handle_learning_answer(self, item: sqlite3.Row, is_correct: bool, elapsed: float, user_answer: str):
         """Handles correct/incorrect answers for learning items."""
         history = json.loads(item['history'])
         response_times = json.loads(item['response_times'])
+        # Load error_ratios
+        error_ratios = json.loads(item['error_ratios'])
+        
         response_times.append(elapsed)
-        updates = {"response_times": response_times, "last_processed_date": self.DATE_TODAY}
-
+        history.append('O' if is_correct else 'X')
+        
+        # Calculate and append new error ratio
+        total_answers = len(history)
+        total_errors = history.count('X')
+        current_error_ratio = total_errors / total_answers if total_answers > 0 else 0
+        error_ratios.append(current_error_ratio)
+        
+        updates = {
+            "response_times": response_times,
+            "history": history,
+            "error_ratios": error_ratios, # Add to updates
+            "last_processed_date": self.DATE_TODAY
+        }
+        
         if is_correct:
-            history.append('O')
             new_streak = item['correct_streak'] + 1
             print(f"✅ Correct! (Streak {new_streak}/{self.REQUIRED_STREAK})")
             print(f"Answer: {item['answer']}")
             speak(item['answer'])
-
+        
             updates['correct_streak'] = new_streak
             if new_streak >= self.REQUIRED_STREAK:
                 updates['status'] = 'review'
@@ -261,30 +276,35 @@ class SpacedRepetitionApp:
                 updates['next_review_date'] = str(next_review)
                 print(f"🎉 Learning complete! This item will now be reviewed.")
         else:
-            history.append('X')
             new_streak = 0 # Reset streak on incorrect answer
             print(f"❌ Incorrect.")
-            # FIX 3: Use the 'user_answer' variable here
             print(highlight_differences(user_answer, item['answer']))
             speak(item['answer'])
             updates['correct_streak'] = new_streak
-
-        updates['history'] = history
+        
         self.db.update_item_after_session(item['item_id'], updates)
     
-    # FIX 2: Add 'user_answer' parameter to the signature
     def _handle_review_answer(self, item: sqlite3.Row, is_correct: bool, elapsed: float, user_answer: str):
         """Handles correct/incorrect answers for review items."""
         history = json.loads(item['history'])
         response_times = json.loads(item['response_times'])
         review_log = json.loads(item['review_log'])
+        # Load error_ratios
+        error_ratios = json.loads(item['error_ratios'])
         
         response_times.append(elapsed)
         history.append('O' if is_correct else 'X')
+        
+        # Calculate and append new error ratio
+        total_answers = len(history)
+        total_errors = history.count('X')
+        current_error_ratio = total_errors / total_answers if total_answers > 0 else 0
+        error_ratios.append(current_error_ratio)
 
         updates = {
             "response_times": response_times,
             "history": history,
+            "error_ratios": error_ratios, # Add to updates
             "last_processed_date": self.DATE_TODAY
         }
         
@@ -306,7 +326,6 @@ class SpacedRepetitionApp:
                 print("🎉 Perfectly memorized! All review cycles are complete.")
         else:
             print(f"❌ Incorrect.")
-            # FIX 3: Use the 'user_answer' variable here
             print(highlight_differences(user_answer, item['answer']))
             speak(item['answer'])
             # Revert to learning stage on incorrect answer

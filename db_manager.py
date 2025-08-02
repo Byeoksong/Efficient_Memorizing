@@ -70,6 +70,7 @@ class DBManager:
                 status TEXT DEFAULT 'learning' NOT NULL,
                 history TEXT DEFAULT '[]' NOT NULL,
                 response_times TEXT DEFAULT '[]' NOT NULL,
+                error_ratios TEXT DEFAULT '[]' NOT NULL,
                 review_log TEXT DEFAULT '[]' NOT NULL
             )
             """)
