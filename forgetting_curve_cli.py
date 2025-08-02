@@ -1,37 +1,37 @@
 #!/usr/bin/env python3
 """
-Spaced Repetition CLI for Memorization Using the Forgetting Curve
+Spaced Repetition CLI for Memorization Using the Forgetting Curve (Refactored)
 
 This script implements a command-line interface tool to help users memorize
-information effectively by leveraging the forgetting curve concept. Users can
-add new question-answer pairs, review items according to a spaced repetition
-schedule, and track their progress over time.
-
-Key features:
-- Add new Q&A pairs either interactively or from a file.
-- Test learning items with a required correct streak before promotion.
-- Review memorized items with intervals adjusted based on performance and lateness.
-- Save and load progress from a JSON file.
-- Provide statistics on answer history when enabled.
-
-The forgetting schedule is predefined, and the system adapts review intervals
-based on response quality and timeliness.
+information effectively. It is refactored to use a class-based structure
+for better maintainability and clarity, with database operations handled
+by a separate DBManager.
 """
-import sqlite3
-import random
+import argparse
 import datetime
-import time
 import json
-
-from pathlib import Path
 import math
-import sys
 import os
 import platform
-import matplotlib.pyplot as plt
+import random
+import sys
+import time
+import sqlite3
+from typing import List, Dict, Any, Callable, Tuple
+
 from prompt_toolkit import prompt
 from gtts import gTTS
-import argparse
+
+# Import the DBManager class from the db_manager.py file.
+# This file and db_manager.py must be in the same directory.
+try:
+    from db_manager import DBManager
+except ImportError:
+    print("❌ Critical Error: 'db_manager.py' not found.")
+    print("Please make sure 'db_manager.py' is in the same directory as this script.")
+    sys.exit(1)
+
+# --- Utility Functions ---
 
 def clear_screen():
     """Clears the terminal screen."""
@@ -39,636 +39,342 @@ def clear_screen():
     os.system(command)
 
 def get_input_func():
-    """
-    Returns prompt_toolkit.prompt if running in an interactive terminal,
-    otherwise returns the built-in input function.
-    """
-    if sys.stdin.isatty():
-        return prompt
-    else:
-        return input
+    """Returns prompt_toolkit if in an interactive terminal, otherwise the built-in input."""
+    return prompt if sys.stdin.isatty() else input
 
-def speak(text, lang='en'):
-    """
-    Converts text to speech and plays it.
-    Requires gTTS and playsound to be installed.
-    """
+def speak(text: str, lang: str = 'en'):
+    """Converts text to speech and plays it."""
     try:
         tts = gTTS(text=text, lang=lang)
         filename = "temp_answer.mp3"
         tts.save(filename)
-        os.system(f"afplay {filename}") # For macOS
-        # For Windows: os.system(f"start {filename}")
-        # For Linux: os.system(f"mpg123 {filename}") or os.system(f"aplay {filename}")
+        if platform.system() == 'Darwin': # macOS
+            os.system(f"afplay {filename}")
+        elif platform.system() == 'Windows':
+            os.system(f"start {filename}")
+        else: # Linux
+            os.system(f"mpg123 {filename}")
         os.remove(filename)
     except Exception as e:
         print(f"❌ Could not play audio: {e}")
 
-def highlight_differences(user_answer, correct_answer):
-    """
-    Compares two strings and returns a formatted string highlighting differences.
-    Differences are marked with '^' below the user's answer.
-    """
-    highlight = []
-    display_user_answer = []
-    display_correct_answer = []
-
-    # Pad the shorter string with spaces to match the length of the longer string
+def highlight_differences(user_answer: str, correct_answer: str) -> str:
+    """Returns a string visually highlighting the differences between two strings."""
     max_len = max(len(user_answer), len(correct_answer))
-    padded_user_answer = user_answer.ljust(max_len)
-    padded_correct_answer = correct_answer.ljust(max_len)
+    user_padded = user_answer.ljust(max_len)
+    correct_padded = correct_answer.ljust(max_len)
+    
+    highlight = ''.join('^' if u.lower() != c.lower() else ' ' for u, c in zip(user_padded, correct_padded))
+    
+    return f"Your answer:    {user_answer}\n" \
+           f"                {highlight}\n" \
+           f"Correct answer: {correct_answer}"
 
-    for i in range(max_len):
-        u_char = padded_user_answer[i]
-        c_char = padded_correct_answer[i]
-
-        display_user_answer.append(u_char)
-        display_correct_answer.append(c_char)
-
-        if u_char.lower() != c_char.lower():
-            highlight.append('^')
-        else:
-            highlight.append(' ')
-
-    user_label = "Your answer:"
-    correct_label = "Correct answer:"
-    max_label_len = max(len(user_label), len(correct_label))
-
-    user_line = f"{user_label.ljust(max_label_len)} {user_answer}"
-    highlight_line = f"{' ' * (max_label_len + 1)}{''.join(highlight)}"
-    correct_line = f"{correct_label.ljust(max_label_len)} {correct_answer}"
-
-    return f"{user_line}\n{highlight_line}\n{correct_line}"""
-
-def display_progress(current, total, bar_length=20):
-    """
-    Displays a progress bar.
-    """
+def display_progress(current: int, total: int, bar_length: int = 20) -> str:
+    """Creates a text progress bar."""
     if total == 0:
         return "[No items]"
-    
-    progress = (current / total)
-    filled_length = int(bar_length * progress)
-    bar = '█' * filled_length + '-' * (bar_length - filled_length)
+    progress = current / total
+    filled = int(bar_length * progress)
+    bar = '█' * filled + '-' * (bar_length - filled)
     return f"[{bar}] {current}/{total} items"
 
-DB_FILE = Path("memory.db")
-FORGETTING_SCHEDULE = [1, 2, 3, 7, 15, 30, 60, 90, 120]  # days
-REQUIRED_STREAK = 3  # number of consecutive correct answers required
-DAILY_TOTAL_LIMIT = 30  # maximum number of total items (learning + review) per day
+# --- Main Application Class ---
 
-# Calculate DATE_TODAY based on a 3 AM boundary
-now = datetime.datetime.now()
-if now.hour < 3:
-    DATE_TODAY = str((now - datetime.timedelta(days=1)).date())
-else:
-    DATE_TODAY = str(now.date())
-SHOW_HISTORY = False
-
-def init_db():
-    """Initialize the database and create tables if they don't exist."""
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    # Create items table
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS items (
-        item_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        question TEXT NOT NULL,
-        answer TEXT NOT NULL,
-        stage INTEGER DEFAULT 0,
-        correct_streak INTEGER DEFAULT 0,
-        next_review_date TEXT,
-        last_processed_date TEXT,
-        postponed INTEGER DEFAULT 0,
-        created_at TEXT,
-        updated_at TEXT,
-        status TEXT DEFAULT 'learning',
-        history TEXT DEFAULT '[]',
-        response_times TEXT DEFAULT '[]',
-        error_ratios TEXT DEFAULT '[]',
-        review_log TEXT DEFAULT '[]'
-    )
-    """)
-    # Create daily_stats table
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS daily_stats (
-        date TEXT PRIMARY KEY,
-        elapsed_today REAL DEFAULT 0
-    )
-    """)
-    conn.commit()
-    conn.close()
-
-def add_new_items(filename=None):
-    """
-    Add new question-answer pairs to the database.
-
-    If a filename is provided, load pairs from the file. Otherwise, prompt the
-    user interactively.
-
-    Args:
-        filename (str, optional): Path to a file containing Q&A pairs.
-
-    Returns:
-        bool: True if items were added, False otherwise.
-    """
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    items_added = False
-
-    if filename:
-        try:
-            with open(filename, 'r') as f:
-                lines = [line.strip() for line in f if line.strip()]
-            if len(lines) % 2 != 0:
-                print("❌ The input file must contain pairs of lines (question followed by answer).")
-                return False
-            
-            for i in range(0, len(lines), 2):
-                q = lines[i]
-                a = lines[i+1]
-                cursor.execute("""
-                INSERT INTO items (question, answer, next_review_date, created_at, status, response_times, error_ratios, review_log)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                """, (q, a, DATE_TODAY, DATE_TODAY, 'learning', json.dumps([]), json.dumps([]), json.dumps([])))
-                items_added = True
-
-            if items_added:
-                print(f"✅ Added {len(lines)//2} Q&A pairs from {filename}")
-
-        except Exception as e:
-            print(f"❌ Failed to load from {filename}: {e}")
-            return False
-    else:
-        print("📚 Enter new Q&A pairs. Press Enter without typing a question to finish.")
-        while True:
-            q = get_input_func()("Question: ").strip()
-            if q == "":
-                break
-            a = get_input_func()("Answer: ").strip()
-            cursor.execute("""
-            INSERT INTO items (question, answer, next_review_date, created_at, last_processed_date, status, response_times, error_ratios, review_log)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (q, a, DATE_TODAY, DATE_TODAY, DATE_TODAY, 'learning', json.dumps([]), json.dumps([]), json.dumps([])))
-            items_added = True
-
-    if items_added:
-        conn.commit()
-    conn.close()
-    return items_added
-
-def edit_item(item_id):
-    """
-    Allows the user to edit the question and answer of a specific item in the database.
-
-    Args:
-        item_id (int): The ID of the item to edit.
-    """
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.row_factory = sqlite3.Row
+class SpacedRepetitionApp:
+    """Class that encapsulates the main logic of the Spaced Repetition application."""
     
-    cursor.execute("SELECT * FROM items WHERE item_id = ?", (item_id,))
-    item = cursor.fetchone()
+    def __init__(self):
+        # Settings
+        self.FORGETTING_SCHEDULE = [1, 2, 3, 7, 15, 30, 60, 90, 120]  # Review intervals (days)
+        self.REQUIRED_STREAK = 3  # Number of consecutive correct answers to complete learning
+        self.DAILY_TOTAL_LIMIT = 30 # Maximum number of learning + review items per day
 
-    if not item:
-        print(f"❌ Item with ID {item_id} not found.")
-        conn.close()
-        return
+        # Date and Time
+        now = datetime.datetime.now()
+        self.DATE_TODAY = str((now - datetime.timedelta(days=1)).date() if now.hour < 3 else now.date())
 
-    print(f"\n✏️ Editing Item {item_id}:")
-    print(f"Current Question: {item['question']}")
-    new_q = get_input_func()("New Question (leave blank to keep current): ").strip()
-    if new_q:
-        cursor.execute("UPDATE items SET question = ? WHERE item_id = ?", (new_q, item_id))
+        # Database Manager
+        self.db = DBManager("memory.db")
+        self.elapsed_today = 0.0
 
-    print(f"Current Answer: {item['answer']}")
-    new_a = get_input_func()("New Answer (leave blank to keep current): ").strip()
-    if new_a:
-        cursor.execute("UPDATE items SET answer = ? WHERE item_id = ?", (new_a, item_id))
+    def run(self):
+        """Controls the main execution flow of the application."""
+        parser = self._create_arg_parser()
+        args = parser.parse_args()
 
-    conn.commit()
-    conn.close()
-    print(f"✅ Item {item_id} updated.")
+        with self.db: # Use a 'with' statement for automatic DB connection and disconnection
+            self.db.initialize_database()
 
-def estimate_r(item, is_correct, response_time):
-    """
-    Estimate a rating 'r' value based on recent answer history and response time.
-    """
-    history = json.loads(item["history"])
-    x_count = history[-5:].count('X')
-    o_streak = 0
-    for h in reversed(history):
-        if h == 'O':
-            o_streak += 1
-        else:
-            break
+            if self._handle_early_exit_commands(args):
+                return
+            
+            if args.filename:
+                self.add_items_from_file(args.filename)
+                get_input_func()("Items added from file. Press Enter to start the learning session...")
 
-    if not is_correct:
-        return 0
-    else:
-        if o_streak >= 3:
-            return 5
-        elif o_streak == 2:
-            return 4
-        elif o_streak == 1:
-            return 3
-        else:
-            return 2
+            # Preparation before starting the session
+            self.prepare_daily_session()
 
-def get_learning_items():
-    """
-    Retrieve all learning items from the database, ordered by creation date.
+            # Run learning and review sessions
+            self._run_learning_session()
+            self._run_review_session()
 
-    Returns:
-        list: List of item IDs to be tested.
-    """
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.execute("""
-        SELECT item_id FROM items 
-        WHERE status = 'learning' AND correct_streak < ? 
-        ORDER BY created_at
-    """, (REQUIRED_STREAK,))
-    learning_keys = [row[0] for row in cursor.fetchall()]
-    conn.close()
-    return learning_keys
+            # Save and display final results
+            self.db.save_daily_stats(self.DATE_TODAY, self.elapsed_today)
+            self._display_final_summary()
 
-def test_items(elapsed_today, learning_keys_for_session):
-    """
-    Conduct testing of learning items, prompting user for answers and updating item states in the database.
+    def _create_arg_parser(self) -> argparse.ArgumentParser:
+        """Creates and returns an ArgumentParser for parsing command-line arguments."""
+        parser = argparse.ArgumentParser(
+            description="Spaced Repetition CLI Tool.",
+            epilog="""Available commands during a session:
+  !edit_now      Edit the current question/answer
+  !edit_before   Edit the previous question/answer
+  !pause         Pause and save the session""",
+            formatter_class=argparse.RawTextHelpFormatter
+        )
+        parser.add_argument("filename", nargs="?", help="Path to a text file containing Q&A pairs (e.g., task.txt).")
+        parser.add_argument("-today", action="store_true", help="View today's learning/review schedule.")
+        parser.add_argument("-tomorrow", action="store_true", help="View tomorrow's review schedule.")
+        parser.add_argument("-delete-today", action="store_true", help="Delete all items added today.")
+        return parser
 
-    Args:
-        elapsed_today (float): The accumulated time spent today.
-        learning_keys_for_session (list): List of item IDs to be tested in this session.
+    def _handle_early_exit_commands(self, args: argparse.Namespace) -> bool:
+        """Handles commands that cause the program to exit immediately after execution."""
+        if args.delete_today:
+            count = self.db.delete_items_created_on(self.DATE_TODAY)
+            print(f"🗑️ Deleted {count} items created today.")
+            return True
+        if args.today:
+            self.show_schedule_for_today()
+            return True
+        if args.tomorrow:
+            self.show_schedule_for_tomorrow()
+            return True
+        if not sys.stdin.isatty():
+            print("💡 Not an interactive terminal. Displaying scheduled items and exiting.")
+            self.show_schedule_for_today()
+            return True
+        return False
 
-    Returns:
-        float: The updated accumulated time spent today.
-    """
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.row_factory = sqlite3.Row
-    previous_key = None
+    def prepare_daily_session(self):
+        """Performs necessary preparations before starting a day's session."""
+        print("\n📖 Spaced Repetition CLI — Memorize Smarter with Spaced Repetition!")
+        self.elapsed_today = self.db.get_daily_stats(self.DATE_TODAY)
+        self.db.reset_daily_postponed_status(self.DATE_TODAY)
 
-    random.shuffle(learning_keys_for_session)
-    total_learning_items = len(learning_keys_for_session)
-    for i, key in enumerate(learning_keys_for_session):
-        clear_screen()
-        cursor.execute("SELECT * FROM items WHERE item_id = ?", (key,))
-        item = cursor.fetchone()
-        if not item:
-            continue
+        # Set postponed flag for items exceeding the daily limit
+        learning_ids, review_ids = self.db.get_due_item_ids(self.DATE_TODAY)
+        all_due_ids = learning_ids + review_ids
+        if len(all_due_ids) > self.DAILY_TOTAL_LIMIT:
+            excess_ids = all_due_ids[self.DAILY_TOTAL_LIMIT:]
+            self.db.set_postponed_status_for_excess_items(excess_ids)
+            print(f"⚠️ Daily limit ({self.DAILY_TOTAL_LIMIT} items) exceeded. {len(excess_ids)} items will be postponed to tomorrow.")
 
-        print(display_progress(i + 1, total_learning_items))
-        print("")
-        print(f"[Q] {item['question']}")
-        start_time = time.time()
-        user_input = get_input_func()("> ")
-        elapsed = time.time() - start_time
-        elapsed_today += elapsed
+    def _run_learning_session(self):
+        """Conducts a session for items in the 'learning' state."""
+        learning_ids, _ = self.db.get_due_item_ids(self.DATE_TODAY)
+        if not learning_ids:
+            return
 
-        if user_input.strip().lower() == "!edit_now":
-            edit_item(key)
-            continue
-        if user_input.strip().lower() == "!edit_before":
-            if previous_key:
-                edit_item(previous_key)
-            else:
-                print("No previous item to edit.")
-            continue
-        if user_input.strip().lower() == "!pause":
-            print("Pausing session. Your progress has been saved.")
-            cursor.execute("INSERT OR REPLACE INTO daily_stats (date, elapsed_today) VALUES (?, ?)", (DATE_TODAY, elapsed_today))
-            conn.commit()
-            conn.close()
-            sys.exit()
+        print(f"\n📚 Starting learning session for {len(learning_ids)} new items. (Required streak: {self.REQUIRED_STREAK})")
+        get_input_func()("Press Enter to start...")
+        self._process_session(learning_ids, self._handle_learning_answer)
 
-        user_answer = user_input
-        is_correct = user_answer.strip().lower() == item['answer'].strip().lower()
+    def _run_review_session(self):
+        """Conducts a session for items in the 'review' state."""
+        _, review_ids = self.db.get_due_item_ids(self.DATE_TODAY)
+        if not review_ids:
+            return
+            
+        print(f"\n✨ Starting review session for {len(review_ids)} items.")
+        get_input_func()("Press Enter to start...")
+        self._process_session(review_ids, self._handle_review_answer)
+
+    def _process_session(self, item_ids: List[int], answer_handler: Callable):
+        """Core method that handles the common logic of learning/review sessions."""
+        random.shuffle(item_ids)
+        previous_key = None
+
+        for i, item_id in enumerate(item_ids):
+            item = self.db.get_item(item_id)
+            if not item: continue
+
+            clear_screen()
+            print(display_progress(i + 1, len(item_ids)))
+            print(f"\n[Q] {item['question']}")
+
+            start_time = time.time()
+            user_input = get_input_func()("> ").strip()
+            elapsed = time.time() - start_time
+            self.elapsed_today += elapsed
+            
+            # Command processing
+            if user_input.lower() == "!pause":
+                print("⏸️ Pausing the session. Your progress has been saved.")
+                self.db.save_daily_stats(self.DATE_TODAY, self.elapsed_today)
+                sys.exit()
+            if user_input.lower() == "!edit_now":
+                self.edit_item_interactively(item_id)
+                # Retry the current item
+                continue
+            if user_input.lower() == "!edit_before":
+                if previous_key:
+                    self.edit_item_interactively(previous_key)
+                else:
+                    print("No previous item to edit.")
+                # Retry the current item
+                continue
+
+            # Call the answer handling logic
+            is_correct = user_input.lower() == item['answer'].strip().lower()
+            # FIX 1: Pass the 'user_input' variable to the handler
+            answer_handler(item, is_correct, elapsed, user_input)
+
+            previous_key = item_id
+            get_input_func()("\nPress Enter to continue...")
+
+    # FIX 2: Add 'user_answer' parameter to the signature
+    def _handle_learning_answer(self, item: sqlite3.Row, is_correct: bool, elapsed: float, user_answer: str):
+        """Handles correct/incorrect answers for learning items."""
         history = json.loads(item['history'])
         response_times = json.loads(item['response_times'])
         response_times.append(elapsed)
-        r = estimate_r(item, is_correct, elapsed)
-        cursor.execute("UPDATE items SET last_processed_date = ?, response_times = ? WHERE item_id = ?", (DATE_TODAY, json.dumps(response_times), key))
+        updates = {"response_times": response_times, "last_processed_date": self.DATE_TODAY}
 
         if is_correct:
             history.append('O')
             new_streak = item['correct_streak'] + 1
-            print(f"✅ Correct! ({new_streak}/{REQUIRED_STREAK})")
-            print(f"Correct answer: {item['answer']}")
+            print(f"✅ Correct! (Streak {new_streak}/{self.REQUIRED_STREAK})")
+            print(f"Answer: {item['answer']}")
             speak(item['answer'])
-            if new_streak >= REQUIRED_STREAK:
-                next_day = datetime.date.fromisoformat(DATE_TODAY) + datetime.timedelta(days=FORGETTING_SCHEDULE[0])
-                cursor.execute("""UPDATE items SET status = 'review', stage = 1, next_review_date = ?, correct_streak = 0, history = ? WHERE item_id = ?""", 
-                               (str(next_day), json.dumps(history), key))
-            else:
-                cursor.execute("UPDATE items SET correct_streak = ?, history = ? WHERE item_id = ?", (new_streak, json.dumps(history), key))
-            get_input_func()("Press Enter to continue...")
+
+            updates['correct_streak'] = new_streak
+            if new_streak >= self.REQUIRED_STREAK:
+                updates['status'] = 'review'
+                updates['stage'] = 1
+                updates['correct_streak'] = 0 # Reset for the review stage
+                next_review = datetime.date.fromisoformat(self.DATE_TODAY) + datetime.timedelta(days=self.FORGETTING_SCHEDULE[0])
+                updates['next_review_date'] = str(next_review)
+                print(f"🎉 Learning complete! This item will now be reviewed.")
         else:
             history.append('X')
-            print("❌ Incorrect.")
+            new_streak = 0 # Reset streak on incorrect answer
+            print(f"❌ Incorrect.")
+            # FIX 3: Use the 'user_answer' variable here
             print(highlight_differences(user_answer, item['answer']))
             speak(item['answer'])
-            get_input_func()("Press Enter to continue...")
-            new_streak = max(0, item['correct_streak'] - 1)
-            cursor.execute("""UPDATE items SET correct_streak = ?, stage = 0, status = 'learning', next_review_date = ?, history = ? WHERE item_id = ?""", 
-                           (new_streak, DATE_TODAY, json.dumps(history), key))
-        previous_key = key
-        conn.commit()
+            updates['correct_streak'] = new_streak
+
+        updates['history'] = history
+        self.db.update_item_after_session(item['item_id'], updates)
     
-    conn.close()
-    return elapsed_today
-
-def update_review_items(elapsed_today, review_keys_for_session):
-    """
-    Update review items scheduled for today, prompting user and adjusting next review dates in the database.
-
-    Args:
-        elapsed_today (float): The accumulated time spent today.
-        review_keys_for_session (list): List of item IDs to be reviewed in this session.
-
-    Returns:
-        float: The updated accumulated time spent today.
-    """
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.row_factory = sqlite3.Row
-    previous_key = None
-
-    random.shuffle(review_keys_for_session)
-    if review_keys_for_session:
-        print("\n✨ Starting review session. Press Enter to begin...")
-        get_input_func()("")
-    
-    total_review_items = len(review_keys_for_session)
-    for i, key in enumerate(review_keys_for_session):
-        clear_screen()
-        cursor.execute("SELECT * FROM items WHERE item_id = ?", (key,))
-        item = cursor.fetchone()
-        if not item:
-            continue
-
-        print(display_progress(i + 1, total_review_items))
-        print("")
-        print(f"[Review] {item['question']}")
-        start_time = time.time()
-        user_input = get_input_func()("> ")
-        elapsed = time.time() - start_time
-        elapsed_today += elapsed
-
-        if user_input.strip().lower() == "!edit_now":
-            edit_item(key)
-            continue
-        if user_input.strip().lower() == "!edit_before":
-            if previous_key:
-                edit_item(previous_key)
-            else:
-                print("No previous item to edit.")
-            continue
-        if user_input.strip().lower() == "!pause":
-            print("Pausing session. Your progress has been saved.")
-            cursor.execute("INSERT OR REPLACE INTO daily_stats (date, elapsed_today) VALUES (?, ?)", (DATE_TODAY, elapsed_today))
-            conn.commit()
-            conn.close()
-            sys.exit()
-
-        user_answer = user_input
-        is_correct = user_answer.strip().lower() == item['answer'].strip().lower()
+    # FIX 2: Add 'user_answer' parameter to the signature
+    def _handle_review_answer(self, item: sqlite3.Row, is_correct: bool, elapsed: float, user_answer: str):
+        """Handles correct/incorrect answers for review items."""
         history = json.loads(item['history'])
         response_times = json.loads(item['response_times'])
         review_log = json.loads(item['review_log'])
+        
         response_times.append(elapsed)
-        r = estimate_r(item, is_correct, elapsed)
+        history.append('O' if is_correct else 'X')
 
+        updates = {
+            "response_times": response_times,
+            "history": history,
+            "last_processed_date": self.DATE_TODAY
+        }
+        
         if is_correct:
-            history.append('O')
-            print("✅ Correct!")
-            print(f"Correct answer: {item['answer']}")
+            print(f"✅ Correct!")
+            print(f"Answer: {item['answer']}")
             speak(item['answer'])
+
             new_stage = item['stage'] + 1
-            if new_stage <= len(FORGETTING_SCHEDULE):
-                base_days = FORGETTING_SCHEDULE[new_stage - 1]
-                scheduled_date = datetime.date.fromisoformat(item['next_review_date'])
-                today = datetime.date.fromisoformat(DATE_TODAY)
-                days_late = max(0, (today - scheduled_date).days)
-
-                r_factor = max(0.3, math.exp(-0.3 * (5 - r)))
-                adjusted_by_r = base_days * r_factor
-
-                lateness_factor = days_late / base_days if base_days > 0 else 0
-                final_interval = max(1, int(adjusted_by_r * (1 + lateness_factor)))
-
-                review_log.append({
-                    "date": DATE_TODAY,
-                    "scheduled_interval": base_days,
-                    "actual_interval": base_days + days_late,
-                    "is_correct": is_correct,
-                    "r": r,
-                    "response_time": elapsed
-                })
-
-                next_day = today + datetime.timedelta(days=final_interval)
-                cursor.execute("""UPDATE items SET stage = ?, next_review_date = ?, history = ?, response_times = ?, review_log = ?, last_processed_date = ? WHERE item_id = ?""", 
-                               (new_stage, str(next_day), json.dumps(history), json.dumps(response_times), json.dumps(review_log), DATE_TODAY, key))
-                print(f"📅 Next review scheduled in {final_interval} days.")
+            if new_stage <= len(self.FORGETTING_SCHEDULE):
+                interval = self.FORGETTING_SCHEDULE[new_stage - 1]
+                next_review = datetime.date.fromisoformat(self.DATE_TODAY) + datetime.timedelta(days=interval)
+                updates['stage'] = new_stage
+                updates['next_review_date'] = str(next_review)
+                print(f"📅 Next review in {interval} days.")
             else:
-                cursor.execute("UPDATE items SET next_review_date = 'done', history = ?, response_times = ?, review_log = ?, last_processed_date = ? WHERE item_id = ?", 
-                               (json.dumps(history), json.dumps(response_times), json.dumps(review_log), DATE_TODAY, key))
-                print("🎉 Fully memorized!")
-            get_input_func()("Press Enter to continue...")
+                updates['status'] = 'done' # All review stages completed
+                updates['next_review_date'] = None
+                print("🎉 Perfectly memorized! All review cycles are complete.")
         else:
-            history.append('X')
-            print("❌ Incorrect.")
+            print(f"❌ Incorrect.")
+            # FIX 3: Use the 'user_answer' variable here
             print(highlight_differences(user_answer, item['answer']))
             speak(item['answer'])
-            get_input_func()("Press Enter to continue...")
-            review_log.append({
-                "date": DATE_TODAY,
-                "scheduled_interval": item['stage'],
-                "actual_interval": (datetime.date.fromisoformat(DATE_TODAY) - datetime.date.fromisoformat(item['next_review_date'])).days,
-                "is_correct": False,
-                "r": r,
-                "response_time": elapsed
-            })
-            cursor.execute("""UPDATE items SET status = 'learning', correct_streak = 0, stage = 0, next_review_date = ?, history = ?, response_times = ?, review_log = ?, last_processed_date = ? WHERE item_id = ?""", 
-                           (DATE_TODAY, json.dumps(history), json.dumps(response_times), json.dumps(review_log), DATE_TODAY, key))
-        previous_key = key
-        conn.commit()
+            # Revert to learning stage on incorrect answer
+            updates['status'] = 'learning'
+            updates['stage'] = 0
+            updates['correct_streak'] = 0
+            updates['next_review_date'] = self.DATE_TODAY
+            print("📉 This item will return to the 'learning' phase.")
 
-    conn.close()
-    return elapsed_today
+        review_log.append({"date": self.DATE_TODAY, "is_correct": is_correct, "response_time": elapsed})
+        updates['review_log'] = review_log
+        self.db.update_item_after_session(item['item_id'], updates)
 
+    def add_items_from_file(self, filename: str):
+        """Reads Q&A pairs from a text file and adds them to the DB."""
+        try:
+            with open(filename, 'r', encoding='utf-8') as f:
+                lines = [line.strip() for line in f if line.strip()]
+            if len(lines) % 2 != 0:
+                print("❌ The file must contain pairs of 'question-answer'.")
+                return
+            
+            items_to_add = [(lines[i], lines[i+1]) for i in range(0, len(lines), 2)]
+            count = self.db.add_items(items_to_add, self.DATE_TODAY)
+            print(f"✅ Added {count} items from file '{filename}'.")
+        except FileNotFoundError:
+            print(f"❌ File '{filename}' not found.")
+        except Exception as e:
+            print(f"❌ Error processing file: {e}")
 
+    def edit_item_interactively(self, item_id: int):
+        """Edits an item based on user input."""
+        item = self.db.get_item(item_id)
+        if not item:
+            print(f"❌ Item ID {item_id} not found.")
+            return
 
-
-def show_statistics():
-    """
-    Display answer history sequences for all items from the database.
-    """
-    if not SHOW_HISTORY:
-        return
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.row_factory = sqlite3.Row
-    print("\n📊 Answer History Sequences:")
-    cursor.execute("SELECT item_id, question, history FROM items ORDER BY item_id")
-    for item in cursor.fetchall():
-        q_short = item['question'][:30] + ('...' if len(item['question']) > 30 else '')
-        history = ''.join(json.loads(item['history']))
-        print(f"Q{item['item_id']}: {q_short}\n  History: {history}")
-    conn.close()
-
-
-def main():
-    """
-    Main entry point for the CLI application.
-
-    Initializes the database, handles command-line arguments, runs learning and 
-    review sessions, and displays statistics.
-    """
-    init_db() # Ensure DB and tables exist
-    parser = argparse.ArgumentParser(
-        description="Spaced Repetition CLI for Memorization Using the Forgetting Curve.",
-        epilog="""Interactive Commands (during learning/review sessions):
-  !edit_now      Edit the current question or answer.
-  !edit_before   Edit the previous question or answer.
-  !pause         Pause the current session and save progress.
-""",
-        formatter_class=argparse.RawTextHelpFormatter
-    )
-    parser.add_argument(
-        "filename",
-        nargs="?",
-        help="Path to a file containing Q&A pairs to add (e.g., task.txt)."
-    )
-    parser.add_argument(
-        "-today",
-        action="store_true",
-        help="Show today's scheduled review and learning items."
-    )
-    parser.add_argument(
-        "-tomorrow",
-        action="store_true",
-        help="Show tomorrow's scheduled review and learning items."
-    )
-    parser.add_argument(
-        "-delete-today",
-        action="store_true",
-        help="Delete all items created today."
-    )
-    args = parser.parse_args()
-
-    print("\n📖 Spaced Repetition CLI — Memorize with the Forgetting Curve!")
-    print(f"\n⚙️ Current Settings:")
-    print(f"   Forgetting Schedule (days): {FORGETTING_SCHEDULE}")
-    print(f"   Required Correct Streak: {REQUIRED_STREAK}")
-    print(f"   DAILY_TOTAL_LIMIT: {DAILY_TOTAL_LIMIT}  # maximum number of total items (learning + review) per day")
-
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-
-    # Get elapsed_today from the database
-    cursor.execute("SELECT elapsed_today FROM daily_stats WHERE date = ?", (DATE_TODAY,))
-    row = cursor.fetchone()
-    elapsed_today = row[0] if row else 0
-
-    # Reset postponed status for items from previous days
-    cursor.execute("UPDATE items SET postponed = 0 WHERE postponed = 1 AND last_processed_date != ?", (DATE_TODAY,))
-    conn.commit()
-
-    # Handle arguments that exit early
-    if args.delete_today:
-        cursor.execute("DELETE FROM items WHERE created_at = ?", (DATE_TODAY,))
-        conn.commit()
-        print(f"🗑️ Deleted {cursor.rowcount} items created today.")
-        conn.close()
-        sys.exit()
-
-    if args.filename:
-        items_added = add_new_items(args.filename)
-        if items_added:
-            get_input_func()("Press Enter to start the learning session...")
-
-
-    # Get all due learning and review items from the database
-    cursor.execute("SELECT item_id, created_at FROM items WHERE status = 'learning' ORDER BY created_at DESC")
-    all_due_learning_keys = [row[0] for row in cursor.fetchall()]
-    
-    cursor.execute("SELECT item_id, next_review_date FROM items WHERE status = 'review' AND next_review_date <= ?", (DATE_TODAY,))
-    all_due_review_keys = [row[0] for row in cursor.fetchall()]
-
-    # Combine and apply DAILY_TOTAL_LIMIT
-    combined_due_keys = all_due_learning_keys + all_due_review_keys
-    
-    # Set postponed flag for items exceeding the daily limit
-    for i, key in enumerate(combined_due_keys):
-        cursor.execute("UPDATE items SET postponed = ? WHERE item_id = ?", (1 if i >= DAILY_TOTAL_LIMIT else 0, key))
-    conn.commit()
-
-    # Filter items for today's session based on postponed status
-    learning_keys_for_session = [k for k in all_due_learning_keys if not is_postponed(k, cursor)]
-    review_keys_for_session = [k for k in all_due_review_keys if not is_postponed(k, cursor)]
-
-    # Show how many review items are scheduled today
-    print(f"\n🗓️  You have {len(review_keys_for_session)} item(s) scheduled for review today.")
-    print(f"🆕 You have {len(learning_keys_for_session)} new learning item(s) for today.")
-
-    if args.today:
-        print(f"\n📌 Today's scheduled items:")
-        print(f"🔁 Review items: {len(review_keys_for_session)}")
-        print(f"🆕 Learning items: {len(learning_keys_for_session)}")
-        conn.close()
-        sys.exit()
-    if args.tomorrow:
-        tomorrow = str(datetime.date.fromisoformat(DATE_TODAY) + datetime.timedelta(days=1))
-        cursor.execute("SELECT COUNT(*) FROM items WHERE status = 'review' AND next_review_date = ?", (tomorrow,))
-        review_tomorrow_count = cursor.fetchone()[0]
-        cursor.execute("SELECT COUNT(*) FROM items WHERE status = 'learning' AND created_at = ?", (tomorrow,))
-        learning_tomorrow_count = cursor.fetchone()[0]
-        print(f"\n🔮 Tomorrow's scheduled items:")
-        print(f"🔁 Review items: {review_tomorrow_count}")
-        print(f"🆕 Learning items (pre-added for tomorrow): {learning_tomorrow_count}")
-        conn.close()
-        sys.exit()
-
-    if not sys.stdin.isatty():
-        print("\n💡 Not running in an interactive terminal. Exiting after displaying scheduled items.")
-        conn.close()
-        sys.exit()
-
-    while True:
-        # Recalculate session items in each iteration
-        cursor.execute("SELECT item_id FROM items WHERE status = 'learning' AND postponed = 0")
-        learning_keys_for_session = [row[0] for row in cursor.fetchall()]
-        cursor.execute("SELECT item_id FROM items WHERE status = 'review' AND next_review_date <= ? AND postponed = 0", (DATE_TODAY,))
-        review_keys_for_session = [row[0] for row in cursor.fetchall()]
-
-        if not learning_keys_for_session and not review_keys_for_session:
-            break # No more items to process
-
-        if learning_keys_for_session:
-            elapsed_today = test_items(elapsed_today, learning_keys_for_session)
+        print(f"\n✏️ Editing Item (ID: {item_id}):")
+        print(f"Current Question: {item['question']}")
+        new_q = get_input_func()("New Question (Enter to keep): ").strip()
+        print(f"Current Answer: {item['answer']}")
+        new_a = get_input_func()("New Answer (Enter to keep): ").strip()
         
-        if review_keys_for_session:
-            elapsed_today = update_review_items(elapsed_today, review_keys_for_session)
+        if new_q or new_a:
+            self.db.edit_item(item_id, new_q or None, new_a or None)
+            print("✅ Item updated successfully.")
+        else:
+            print("Edit canceled.")
 
-    show_statistics()
+    def show_schedule_for_today(self):
+        learning_ids, review_ids = self.db.get_due_item_ids(self.DATE_TODAY)
+        print("\n--- Today's Learning/Review Schedule ---")
+        print(f"📚 New items to learn: {len(learning_ids)}")
+        print(f"✨ Items to review: {len(review_ids)}")
+        print(f"🗓️ A total of {len(learning_ids) + len(review_ids)} items are scheduled.")
 
-    # Save final elapsed time for the day
-    cursor.execute("INSERT OR REPLACE INTO daily_stats (date, elapsed_today) VALUES (?, ?)", (DATE_TODAY, elapsed_today))
-    conn.commit()
-    conn.close()
+    def show_schedule_for_tomorrow(self):
+        tomorrow = str(datetime.date.fromisoformat(self.DATE_TODAY) + datetime.timedelta(days=1))
+        review_count = self.db.get_review_count_for_date(tomorrow)
+        print("\n--- Tomorrow's Review Schedule ---")
+        print(f"✨ Items scheduled for review: {review_count}")
+    
+    def _display_final_summary(self):
+        """Displays the final summary after the session ends."""
+        minutes, seconds = divmod(int(self.elapsed_today), 60)
+        print("\n🎉 Today's learning and review are complete!")
+        print(f"⏱️ Total study time: {minutes} minutes {seconds} seconds")
+        print(f"📅 Reference date: {self.DATE_TODAY}")
 
-    minutes = int(elapsed_today // 60)
-    print(f"⏱️  Time spent today: {minutes} min")
-    print(f"📅 Simulated date: {DATE_TODAY}")
-    print("🎯 Today's memorization and review are complete!")
-
-def is_postponed(item_id, cursor):
-    cursor.execute("SELECT postponed FROM items WHERE item_id = ?", (item_id,))
-    result = cursor.fetchone()
-    return result[0] == 1 if result else True
 
 if __name__ == "__main__":
-    main()
-
+    app = SpacedRepetitionApp()
+    app.run()
