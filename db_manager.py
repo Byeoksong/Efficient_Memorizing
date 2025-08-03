@@ -164,7 +164,7 @@ class DBManager:
             updates (Dict[str, Any]): A dictionary of fields and values to update.
         """
         # Convert JSON fields to strings
-        for key in ['history', 'response_times', 'review_log']:
+        for key in ['history', 'response_times', 'error_ratios', 'review_log']:
             if key in updates and isinstance(updates[key], list):
                 updates[key] = json.dumps(updates[key])
 

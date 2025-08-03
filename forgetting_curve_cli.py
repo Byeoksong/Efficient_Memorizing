@@ -19,7 +19,7 @@ import random
 import sys
 import time
 import sqlite3
-from typing import List, Dict, Any, Callable, Tuple
+from typing import List, Dict, Any, Callable, Tuple, Optional
 
 from prompt_toolkit import prompt
 from gtts import gTTS
@@ -118,9 +118,23 @@ class SpacedRepetitionApp:
             # Preparation before starting the session
             self.prepare_daily_session()
 
-            # Run learning and review sessions
-            self._run_learning_session()
-            self._run_review_session()
+            # Main application loop
+            while True:
+                learning_ids, review_ids = self.db.get_due_item_ids(self.DATE_TODAY)
+                
+                if not learning_ids and not review_ids:
+                    break # Exit loop if no items are due
+
+                if learning_ids:
+                    print(f"\n📚 Starting learning round for {len(learning_ids)} items. (Required streak: {self.REQUIRED_STREAK})")
+                    get_input_func()("Press Enter to start...")
+                    self._run_learning_session(learning_ids)
+
+                if review_ids:
+                    print(f"\n✨ Starting review session for {len(review_ids)} items.")
+                    get_input_func()("Press Enter to start...")
+                    self._run_review_session(review_ids)
+
 
             # Save and display final results
             self.db.save_daily_stats(self.DATE_TODAY, self.elapsed_today)
@@ -174,25 +188,20 @@ class SpacedRepetitionApp:
             self.db.set_postponed_status_for_excess_items(excess_ids)
             print(f"⚠️ Daily limit ({self.DAILY_TOTAL_LIMIT} items) exceeded. {len(excess_ids)} items will be postponed to tomorrow.")
 
-    def _run_learning_session(self):
+    def _run_learning_session(self, learning_ids):
         """Conducts a session for items in the 'learning' state."""
-        learning_ids, _ = self.db.get_due_item_ids(self.DATE_TODAY)
-        if not learning_ids:
-            return
+        while True:
+            if not learning_ids:
+                break
+            self._process_session(learning_ids, self._handle_learning_answer)
+            # Check for remaining learning items for the next round
+            learning_ids, _ = self.db.get_due_item_ids(self.DATE_TODAY)
 
-        print(f"\n📚 Starting learning session for {len(learning_ids)} new items. (Required streak: {self.REQUIRED_STREAK})")
-        get_input_func()("Press Enter to start...")
-        print(learning_ids)
-        self._process_session(learning_ids, self._handle_learning_answer)
 
-    def _run_review_session(self):
+    def _run_review_session(self, review_ids):
         """Conducts a session for items in the 'review' state."""
-        _, review_ids = self.db.get_due_item_ids(self.DATE_TODAY)
         if not review_ids:
             return
-            
-        print(f"\n✨ Starting review session for {len(review_ids)} items.")
-        get_input_func()("Press Enter to start...")
         self._process_session(review_ids, self._handle_review_answer)
 
     def _process_session(self, item_ids: List[int], answer_handler: Callable):
@@ -220,35 +229,46 @@ class SpacedRepetitionApp:
                 sys.exit()
             if user_input.lower() == "!edit_now":
                 self.edit_item_interactively(item_id)
-                # Retry the current item
+                item_ids.insert(i + 1, item_id) # Re-ask the current question
                 continue
             if user_input.lower() == "!edit_before":
                 if previous_key:
                     self.edit_item_interactively(previous_key)
+                    item_ids.insert(i + 1, previous_key) # Re-ask the previous question
                 else:
                     print("No previous item to edit.")
-                # Retry the current item
+                item_ids.insert(i + 1, item_id) # Also re-ask the current question
                 continue
 
             # Call the answer handling logic
             is_correct = user_input.lower() == item['answer'].strip().lower()
-            # FIX 1: Pass the 'user_input' variable to the handler
             answer_handler(item, is_correct, elapsed, user_input)
 
             previous_key = item_id
             get_input_func()("\nPress Enter to continue...")
 
+    def _robust_json_loads(self, json_str: Optional[str], default_val: list = []) -> list:
+        """Safely loads a JSON string, handling None, empty strings, and double-encoded strings."""
+        if not json_str:
+            return default_val
+        try:
+            data = json.loads(json_str)
+            if isinstance(data, str):
+                # Handle cases where data might be double-encoded (e.g., '"[]"')
+                data = json.loads(data)
+            return data if isinstance(data, list) else default_val
+        except (json.JSONDecodeError, TypeError):
+            return default_val
+
     def _handle_learning_answer(self, item: sqlite3.Row, is_correct: bool, elapsed: float, user_answer: str):
         """Handles correct/incorrect answers for learning items."""
-        history = json.loads(item['history'])
-        response_times = json.loads(item['response_times'])
-        # Load error_ratios
-        error_ratios = json.loads(item['error_ratios'])
+        history = self._robust_json_loads(item['history'])
+        response_times = self._robust_json_loads(item['response_times'])
+        error_ratios = self._robust_json_loads(item['error_ratios'])
         
         response_times.append(elapsed)
         history.append('O' if is_correct else 'X')
         
-        # Calculate and append new error ratio
         total_answers = len(history)
         total_errors = history.count('X')
         current_error_ratio = total_errors / total_answers if total_answers > 0 else 0
@@ -257,7 +277,7 @@ class SpacedRepetitionApp:
         updates = {
             "response_times": response_times,
             "history": history,
-            "error_ratios": error_ratios, # Add to updates
+            "error_ratios": error_ratios,
             "last_processed_date": self.DATE_TODAY
         }
         
@@ -271,12 +291,12 @@ class SpacedRepetitionApp:
             if new_streak >= self.REQUIRED_STREAK:
                 updates['status'] = 'review'
                 updates['stage'] = 1
-                updates['correct_streak'] = 0 # Reset for the review stage
+                updates['correct_streak'] = 0
                 next_review = datetime.date.fromisoformat(self.DATE_TODAY) + datetime.timedelta(days=self.FORGETTING_SCHEDULE[0])
                 updates['next_review_date'] = str(next_review)
                 print(f"🎉 Learning complete! This item will now be reviewed.")
         else:
-            new_streak = 0 # Reset streak on incorrect answer
+            new_streak = 0
             print(f"❌ Incorrect.")
             print(highlight_differences(user_answer, item['answer']))
             speak(item['answer'])
@@ -286,16 +306,14 @@ class SpacedRepetitionApp:
     
     def _handle_review_answer(self, item: sqlite3.Row, is_correct: bool, elapsed: float, user_answer: str):
         """Handles correct/incorrect answers for review items."""
-        history = json.loads(item['history'])
-        response_times = json.loads(item['response_times'])
-        review_log = json.loads(item['review_log'])
-        # Load error_ratios
-        error_ratios = json.loads(item['error_ratios'])
+        history = self._robust_json_loads(item['history'])
+        response_times = self._robust_json_loads(item['response_times'])
+        review_log = self._robust_json_loads(item['review_log'])
+        error_ratios = self._robust_json_loads(item['error_ratios'])
         
         response_times.append(elapsed)
         history.append('O' if is_correct else 'X')
         
-        # Calculate and append new error ratio
         total_answers = len(history)
         total_errors = history.count('X')
         current_error_ratio = total_errors / total_answers if total_answers > 0 else 0
@@ -304,7 +322,7 @@ class SpacedRepetitionApp:
         updates = {
             "response_times": response_times,
             "history": history,
-            "error_ratios": error_ratios, # Add to updates
+            "error_ratios": error_ratios,
             "last_processed_date": self.DATE_TODAY
         }
         
@@ -321,14 +339,13 @@ class SpacedRepetitionApp:
                 updates['next_review_date'] = str(next_review)
                 print(f"📅 Next review in {interval} days.")
             else:
-                updates['status'] = 'done' # All review stages completed
+                updates['status'] = 'done'
                 updates['next_review_date'] = None
                 print("🎉 Perfectly memorized! All review cycles are complete.")
         else:
             print(f"❌ Incorrect.")
             print(highlight_differences(user_answer, item['answer']))
             speak(item['answer'])
-            # Revert to learning stage on incorrect answer
             updates['status'] = 'learning'
             updates['stage'] = 0
             updates['correct_streak'] = 0
